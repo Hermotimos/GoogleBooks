@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<header>
+
+</header>
+
+<main role="main">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        {% for book in books %}
+        {{ book }}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</main>
+
+
+{% endblock content %}
