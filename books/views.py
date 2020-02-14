@@ -1,5 +1,8 @@
 from django.shortcuts import render
+
+from books.forms import BookAddForm
 from books.models import Author, Book, Language
+
 
 
 def books_list_view(request):
@@ -12,4 +15,9 @@ def books_list_view(request):
 
 
 def books_add_view(request):
-    pass
+    form = BookAddForm()
+    context = {
+        'form': form
+    }
+
+    return render(request, 'books_add.html', context)
