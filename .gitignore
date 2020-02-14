@@ -1,0 +1,16 @@
+settings.py
+
+.idea
+migrations
+virtualenv
+
+*.pyc
+*~
+__pycache__
+
+
+
+
+
+
+
