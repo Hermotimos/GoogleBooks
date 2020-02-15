@@ -1,7 +1,7 @@
 from django.shortcuts import render
 
 from books.filters import BookFilter
-from books.forms import BooksSearchForm, BooksAddForm
+from books.forms import BooksSearchForm, BooksAddForm, AuthorFormSet
 from books.models import Book
 from books_project.utils import query_debugger
 
@@ -23,8 +23,10 @@ def books_list_view(request):
 @query_debugger
 def books_add_view(request):
     form = BooksAddForm()
-    context = {
-        'form': form
-    }
+    author_forms = AuthorFormSet()
 
+    context = {
+        'form': form,
+        'author_forms': author_forms
+    }
     return render(request, 'books_add.html', context)

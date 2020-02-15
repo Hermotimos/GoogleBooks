@@ -18,30 +18,15 @@
           <form method="POST">    <!--    enctype="multipart/form-data"   -->
             {% csrf_token %}
             <fieldset>
-              {{ form.authors|as_crispy_field }}<br>
-              {{ form.authors.errors }}
-<!--   OVERRIDE IN FORMS: authors           -->
+              {% for form in author_forms %}
+                {{ form|crispy }}
+              {% endfor %}
+              
+              {% for field in form %}
+                {{ field|as_crispy_field }}<br>
+                {{ field.errors }}
+              {% endfor %}
 
-              {{ form.title|as_crispy_field }}<br>
-              {{ form.title.errors }}
-              
-              {{ form.pub_year|as_crispy_field }}<br>
-              {{ form.pub_year.errors }}
-              
-              {{ form.pages|as_crispy_field }}<br>
-              {{ form.pages.errors }}
-              
-              {{ form.isbn_10|as_crispy_field }}<br>
-              {{ form.isbn_10.errors }}
-              
-              {{ form.isbn_13|as_crispy_field }}<br>
-              {{ form.isbn_13.errors }}
-              
-              {{ form.cover_url|as_crispy_field }}<br>
-              {{ form.cover_url.errors }}
-              
-              {{ form.language|as_crispy_field }}<br>
-              {{ form.language.errors }}
             </fieldset>
             
           </form>
