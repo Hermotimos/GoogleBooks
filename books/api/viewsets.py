@@ -15,13 +15,14 @@ from books.models import Author, Book, Language
 
 class BookFilter(filters.FilterSet):
     title = filters.CharFilter(lookup_expr='icontains')
-    authors = filters.ModelMultipleChoiceFilter(field_name='authors__name',  to_field_name='name',
-                                                queryset=Author.objects.all())
-    pub_year = filters.RangeFilter()
+    authors = filters.ModelMultipleChoiceFilter(queryset=Author.objects.all())
+    language = filters.ModelMultipleChoiceFilter(queryset=Language.objects.all())
+    pub_year__gte = filters.NumberFilter(field_name='pub_year', lookup_expr='gte')
+    pub_year__lte = filters.NumberFilter(field_name='pub_year', lookup_expr='lte')
 
     class Meta:
         model = Book
-        fields = ['title', 'authors', 'language', 'pub_year']
+        fields = ['title', 'authors', 'language', 'pub_year__gte', 'pub_year__lte']
 
 
 # class LanguageFilter(filters.FilterSet):
