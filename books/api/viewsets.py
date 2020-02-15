@@ -14,16 +14,14 @@ from books.models import Author, Book, Language
 
 
 class BookFilter(filters.FilterSet):
-
-    # TODO add pub_date and DateFromToRangeFilter (requires DateField)
-
     title = filters.CharFilter(lookup_expr='icontains')
     authors = filters.ModelMultipleChoiceFilter(field_name='authors__name',  to_field_name='name',
                                                 queryset=Author.objects.all())
+    pub_date = filters.RangeFilter()
 
     class Meta:
         model = Book
-        fields = ['title', 'authors', 'language']   # TODO add pub_date and DateFromToRangeFilter (requires DateField)
+        fields = ['title', 'authors', 'language', 'pub_date']
 
 
 # class LanguageFilter(filters.FilterSet):
