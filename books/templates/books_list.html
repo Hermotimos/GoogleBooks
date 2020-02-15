@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
 
-
 {% block title %}
   <title>List of books</title>
 {% endblock title %}
@@ -22,7 +21,17 @@
     <br>
     <ul>
       {% for book in filter.qs %}
-        <li>{{ book }}</li>
+        <li class="pb-2">
+          {{ book.authors.all|join:', ' }},
+          <i>{{ book.title }}</i>,
+          {{ book.pub_year }},
+          pp. {{ book.pages }}&ensp;
+          [{{ book.language }},
+          ISBN-{{ book.isbn_10 }},
+          ISBN-{{ book.isbn_13 }}]
+          <br>
+          View cover at: <a href="{{ book.cover_url }}">{{ book.cover_url }}</a>
+        </li>
       {% endfor %}
     </ul>
     
