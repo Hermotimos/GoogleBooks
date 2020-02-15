@@ -18,11 +18,8 @@
   <!-- Own CSS etc. -->
   <link rel="stylesheet" href="{% static 'css/main.css' %}">
   
-  {% if page_title %}
-    <title>{{ page_title }}</title>
-  {% else %}
-    <title>No title</title>
-  {% endif %}
+  {% block title %}
+  {% endblock title %}
 </head>
 
 <body>
