@@ -11,36 +11,55 @@
   <header>
   
   </header>
-    <main role="main">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <form method="GET">    <!--    enctype="multipart/form-data"   -->
-            {% csrf_token %}     <!--    IS THIS NEEDED ?   -->
-            <fieldset>
-              {{ form.authors|as_crispy_field }}<br>
-              {{ form.authors.errors }}
-        <!--   OVERRIDE IN FORMS: authors           -->
 
-              {{ form.title|as_crispy_field }}<br>
-              {{ form.title.errors }}
-              
-<!--              {{ form.pub_year|as_crispy_field }}<br>-->
-<!--              {{ form.pub_year.errors }}-->
+  <div class="container">
+    
+    <form method="GET">
+      {{ filter.form|crispy }}
+      <button type="submit" class="btn btn-dark">Search</button>
+    </form>
+    
+    <br>
+    <ul>
+      {% for book in filter.qs %}
+        <li>{{ book }}</li>
+      {% endfor %}
+    </ul>
+    
+
+  </div>
+
+
+<!--  <main role="main">-->
+<!--    <div class="container">-->
+<!--      <div class="row">-->
+<!--        <div class="col-md-12">-->
+<!--          <form method="GET">    &lt;!&ndash;    enctype="multipart/form-data"   &ndash;&gt;-->
+<!--            {% csrf_token %}     &lt;!&ndash;    IS THIS NEEDED ?   &ndash;&gt;-->
+<!--            <fieldset>-->
+<!--              {{ form.authors }}<br>-->
+<!--              {{ form.authors.errors }}-->
+<!--        &lt;!&ndash;   OVERRIDE IN FORMS: authors           &ndash;&gt;-->
+<!--  -->
+<!--              {{ form.title }}<br>-->
+<!--              {{ form.title.errors }}-->
 <!--              -->
-<!--              {{ form.pub_year2|as_crispy_field }}<br>-->
-<!--              {{ form.pub_year2.errors }}-->
-
-              
-              {{ form.language|as_crispy_field }}<br>
-              {{ form.language.errors }}
-            </fieldset>
-            
-          </form>
-        </div>
-      </div>
-    </div>
-  </main>
+<!--  &lt;!&ndash;              {{ form.pub_year }}<br>&ndash;&gt;-->
+<!--  &lt;!&ndash;              {{ form.pub_year.errors }}&ndash;&gt;-->
+<!--  &lt;!&ndash;              &ndash;&gt;-->
+<!--  &lt;!&ndash;              {{ form.pub_year2 }}<br>&ndash;&gt;-->
+<!--  &lt;!&ndash;              {{ form.pub_year2.errors }}&ndash;&gt;-->
+<!--  -->
+<!--              -->
+<!--              {{ form.language }}<br>-->
+<!--              {{ form.language.errors }}-->
+<!--            </fieldset>-->
+<!--            -->
+<!--          </form>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </main>-->
 
 
 <!--  <main role="main">-->
