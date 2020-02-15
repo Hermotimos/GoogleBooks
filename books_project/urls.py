@@ -9,7 +9,7 @@ from books.router import router
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('list/', views.books_list_view, name='list'),
+    path('', views.books_list_view, name='list'),
     path('add/', views.books_add_view, name='add'),
 
     path('api/', include(router.urls))
