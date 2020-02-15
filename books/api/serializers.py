@@ -12,7 +12,7 @@ class AuthorSerializer(serializers.ModelSerializer):
 class BookSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Book
-        fields = ['title', 'authors', 'pub_date', 'pages', 'isbn_10', 'isbn_13', 'cover_url', 'language']
+        fields = ['title', 'authors', 'pub_year', 'pages', 'isbn_10', 'isbn_13', 'cover_url', 'language']
 
 
 class LanguageSerializer(serializers.ModelSerializer):

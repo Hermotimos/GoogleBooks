@@ -17,11 +17,11 @@ class BookFilter(filters.FilterSet):
     title = filters.CharFilter(lookup_expr='icontains')
     authors = filters.ModelMultipleChoiceFilter(field_name='authors__name',  to_field_name='name',
                                                 queryset=Author.objects.all())
-    pub_date = filters.RangeFilter()
+    pub_year = filters.RangeFilter()
 
     class Meta:
         model = Book
-        fields = ['title', 'authors', 'language', 'pub_date']
+        fields = ['title', 'authors', 'language', 'pub_year']
 
 
 # class LanguageFilter(filters.FilterSet):
@@ -41,7 +41,6 @@ class AuthorViewSet(viewsets.ModelViewSet):
 class BookViewSet(viewsets.ModelViewSet):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
-    filter_fields = ['title']
     filterset_class = BookFilter
 
 
