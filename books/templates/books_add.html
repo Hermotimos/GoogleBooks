@@ -2,33 +2,47 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-  <form method="POST">    <!--    enctype="multipart/form-data"   -->
-    {% csrf_token %}
-    <fieldset>
-      {{ form.title|as_crispy_field }}<br>
-      {{ form.title.errors }}<br>
-      
-      {{ form.authors|as_crispy_field }}<br>
-      {{ form.authors.errors }}<br>
-      
-      {{ form.pub_date|as_crispy_field }}<br>
-      {{ form.pub_date.errors }}<br>
-      
-      {{ form.pages|as_crispy_field }}<br>
-      {{ form.pages.errors }}<br>
-      
-      {{ form.isbn_10|as_crispy_field }}<br>
-      {{ form.isbn_10.errors }}<br>
-      
-      {{ form.isbn_13|as_crispy_field }}<br>
-      {{ form.isbn_13.errors }}<br>
-      
-      {{ form.cover_url|as_crispy_field }}<br>
-      {{ form.cover_url.errors }}<br>
-      
-      {{ form.language|as_crispy_field }}<br>
-      {{ form.language.errors }}<br>
-    </fieldset>
-    
-  </form>
+
+  <header>
+  
+  </header>
+
+  <main role="main">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <form method="POST">    <!--    enctype="multipart/form-data"   -->
+            {% csrf_token %}
+            <fieldset>
+              {{ form.authors|as_crispy_field }}<br>
+              {{ form.authors.errors }}
+<!--   OVERRIDE IN FORMS: authors           -->
+
+              {{ form.title|as_crispy_field }}<br>
+              {{ form.title.errors }}
+              
+              {{ form.pub_date|as_crispy_field }}<br>
+              {{ form.pub_date.errors }}
+              
+              {{ form.pages|as_crispy_field }}<br>
+              {{ form.pages.errors }}
+              
+              {{ form.isbn_10|as_crispy_field }}<br>
+              {{ form.isbn_10.errors }}
+              
+              {{ form.isbn_13|as_crispy_field }}<br>
+              {{ form.isbn_13.errors }}
+              
+              {{ form.cover_url|as_crispy_field }}<br>
+              {{ form.cover_url.errors }}
+              
+              {{ form.language|as_crispy_field }}<br>
+              {{ form.language.errors }}
+            </fieldset>
+            
+          </form>
+        </div>
+      </div>
+    </div>
+  </main>
 {% endblock content %}
