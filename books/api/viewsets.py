@@ -5,14 +5,6 @@ from books.api.serializers import AuthorSerializer, BookSerializer, LanguageSeri
 from books.models import Author, Book, Language
 
 
-# class AuthorFilter(filters.FilterSet):
-#     name = filters.CharFilter(lookup_expr='icontains')
-#
-#     class Meta:
-#         model = Author
-#         fields = ['name']
-
-
 class BookFilter(filters.FilterSet):
     title = filters.CharFilter(lookup_expr='icontains')
     authors = filters.ModelMultipleChoiceFilter(queryset=Author.objects.all())
@@ -25,18 +17,9 @@ class BookFilter(filters.FilterSet):
         fields = ['title', 'authors', 'language', 'pub_date__gte', 'pub_date__lte']
 
 
-# class LanguageFilter(filters.FilterSet):
-#     name = filters.CharFilter(lookup_expr='icontains')
-#
-#     class Meta:
-#         model = Language
-#         fields = ['name']
-
-
 class AuthorViewSet(viewsets.ModelViewSet):
     queryset = Author.objects.all()
     serializer_class = AuthorSerializer
-    # filterset_class = AuthorFilter
 
 
 class BookViewSet(viewsets.ModelViewSet):
@@ -48,4 +31,3 @@ class BookViewSet(viewsets.ModelViewSet):
 class LanguageViewSet(viewsets.ModelViewSet):
     queryset = Language.objects.all()
     serializer_class = LanguageSerializer
-    # filterset_class = LanguageFilter

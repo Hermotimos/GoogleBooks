@@ -4,10 +4,8 @@ from django.contrib import messages
 from books.filters import BookFilter
 from books.forms import BooksSearchForm, BookForm, FirstAuthorForm, AuthorFormSet, LanguageForm
 from books.models import Author, Book, Language
-from books_project.utils import query_debugger
 
 
-@query_debugger
 def books_list_view(request):
     books = Book.objects.all()
     form = BooksSearchForm()
@@ -21,7 +19,6 @@ def books_list_view(request):
     return render(request, 'books_list.html', context)
 
 
-@query_debugger
 def books_add_view(request):
     if request.method == 'POST':
         first_author_form = FirstAuthorForm(data=request.POST)
