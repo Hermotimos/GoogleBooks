@@ -1,3 +1,4 @@
+from django.core.validators import MinValueValidator
 from django.db import models
 
 
@@ -18,7 +19,7 @@ class Language(models.Model):
 class Book(models.Model):
     title = models.CharField(max_length=500)
     authors = models.ManyToManyField(Author, related_name='books')
-    pub_year = models.CharField(max_length=4)
+    pub_year = models.CharField(max_length=10)
     pages = models.PositiveSmallIntegerField()
     isbn_10 = models.CharField(max_length=10)
     isbn_13 = models.CharField(max_length=13)

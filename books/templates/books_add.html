@@ -35,14 +35,18 @@
             </div>
             
             <div class="form-row">
-              <div class="col-md-3">{{ form.pub_year|as_crispy_field }}</div>
-              <div class="col-md-3">{{ form.pages|as_crispy_field }}</div>
+              <div class="col-md-3">{{ form.year|as_crispy_field }}</div>
+              <div class="col-md-3">{{ form.month|as_crispy_field }}</div>
+              <div class="col-md-3">{{ form.day|as_crispy_field }}</div>
               {% if form.pub_year.errors %}<div class="col-md-3">{{ form.pub_year.errors }}</div>{% endif %}
-              {% if form.pages.errors %}<div class="col-md-3">{{ form.pages.errors }}</div>{% endif %}
+              {% if form.month.errors %}<div class="col-md-3">{{ form.month.errors }}</div>{% endif %}
+              {% if form.day.errors %}<div class="col-md-3">{{ form.day.errors }}</div>{% endif %}
             </div>
             <div class="form-row">
+              <div class="col-md-3">{{ form.pages|as_crispy_field }}</div>
               <div class="col-md-3">{{ form.isbn_10|as_crispy_field }}</div>
               <div class="col-md-3">{{ form.isbn_13|as_crispy_field }}</div>
+              {% if form.pages.errors %}<div class="col-md-3">{{ form.pages.errors }}</div>{% endif %}
               {% if form.isbn_10.errors %}<div class="col-md-3">{{ form.isbn_10.errors }}</div>{% endif %}
               {% if form.isbn_13.errors %}<div class="col-md-3">{{ form.isbn_13.errors }}</div>{% endif %}
             </div>
