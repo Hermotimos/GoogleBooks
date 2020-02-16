@@ -23,10 +23,10 @@ def books_list_view(request):
 @query_debugger
 def books_add_view(request):
     form = BooksAddForm()
-    author_forms = AuthorFormSet()
+    author_formset = AuthorFormSet()
 
     context = {
         'form': form,
-        'author_forms': author_forms
+        'author_formset': author_formset
     }
     return render(request, 'books_add.html', context)

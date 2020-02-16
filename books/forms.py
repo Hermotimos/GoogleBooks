@@ -10,17 +10,30 @@ class BooksSearchForm(forms.ModelForm):
 
 
 class AuthorForm(forms.ModelForm):
+    name = forms.CharField(max_length=100, required=False)
+
     class Meta:
         model = Author
         exclude = []
+
+    def __init__(self, *args, **kwargs):
+        super(AuthorForm, self).__init__(*args, **kwargs)
+        self.fields['name'].label = 'Author'
 
 
 AuthorFormSet = forms.formset_factory(AuthorForm, extra=2)
 
 
 class BooksAddForm(forms.ModelForm):
-    language = forms.CharField()        # TODO use this to populate related model
+    authors = forms.CharField(max_length=100)
+    language = forms.CharField(max_length=2)        # TODO use this to populate related model
 
     class Meta:
         model = Book
-        exclude = ['authors']
+        exclude = []
+
+    def __init__(self, *args, **kwargs):
+        super(BooksAddForm, self).__init__(*args, **kwargs)
+        self.fields['authors'].label = 'Author'
+
+        self.fields['title'].widget.attrs = {'size': 70}
