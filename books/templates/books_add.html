@@ -37,8 +37,13 @@
             
             <!--    First author        -->
             <div class="form-row">
-              <div class="col-md-4">{{ first_author_form.name|as_crispy_field }}</div>
+              <div class="col-md-3">{{ first_author_form.name|as_crispy_field }}</div>
               {% if first_author_form.name.errors %}<div class="col-md-4">{{ first_author_form.name.errors }}</div>{% endif %}
+              <div class="col-md-3">
+                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#authors" aria-expanded="false" aria-controls="authors">
+                  Add more authors
+                </button>
+              </div>
             </div>
             
             <!--    Additional authors        -->
