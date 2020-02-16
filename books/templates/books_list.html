@@ -24,7 +24,7 @@
         <li class="pb-2">
           {{ book.authors.all|join:', ' }},
           <i>{{ book.title }}</i>,
-          {{ book.pub_year|slice:':4' }},
+          {{ book.pub_date|slice:':4' }},
           pp. {{ book.pages }}&ensp;
           [{{ book.language }},
           ISBN-{{ book.isbn_10 }},
@@ -53,11 +53,11 @@
 <!--              {{ form.title }}<br>-->
 <!--              {{ form.title.errors }}-->
 <!--              -->
-<!--  &lt;!&ndash;              {{ form.pub_year }}<br>&ndash;&gt;-->
-<!--  &lt;!&ndash;              {{ form.pub_year.errors }}&ndash;&gt;-->
+<!--  &lt;!&ndash;              {{ form.pub_date }}<br>&ndash;&gt;-->
+<!--  &lt;!&ndash;              {{ form.pub_date.errors }}&ndash;&gt;-->
 <!--  &lt;!&ndash;              &ndash;&gt;-->
-<!--  &lt;!&ndash;              {{ form.pub_year2 }}<br>&ndash;&gt;-->
-<!--  &lt;!&ndash;              {{ form.pub_year2.errors }}&ndash;&gt;-->
+<!--  &lt;!&ndash;              {{ form.pub_date2 }}<br>&ndash;&gt;-->
+<!--  &lt;!&ndash;              {{ form.pub_date2.errors }}&ndash;&gt;-->
 <!--  -->
 <!--              -->
 <!--              {{ form.language }}<br>-->

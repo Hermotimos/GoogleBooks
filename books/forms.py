@@ -52,7 +52,7 @@ class BookForm(forms.ModelForm):
 
     class Meta:
         model = Book
-        exclude = ['authors', 'language', 'pub_year']
+        exclude = ['authors', 'language', 'pub_date']
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

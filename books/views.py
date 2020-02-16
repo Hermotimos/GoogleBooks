@@ -61,11 +61,11 @@ def books_add_view(request):
             day = book_form.cleaned_data['day'] or None
 
             if month and day:
-                book.pub_year = str(year) + '-' + str(month) + '-' + str(day)
+                book.pub_date = str(year) + '-' + str(month) + '-' + str(day)
             elif month:
-                book.pub_year = str(year) + '-' + str(month)
+                book.pub_date = str(year) + '-' + str(month)
             else:
-                book.pub_year = str(year)
+                book.pub_date = str(year)
 
             book.save()
 

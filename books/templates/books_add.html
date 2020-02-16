@@ -54,7 +54,7 @@
               <div class="col-md-3">{{ book_form.year|as_crispy_field }}</div>
               <div class="col-md-3">{{ book_form.month|as_crispy_field }}</div>
               <div class="col-md-3">{{ book_form.day|as_crispy_field }}</div>
-              {% if book_form.pub_year.errors %}<div class="col-md-3">{{ book_form.pub_year.errors }}</div>{% endif %}
+              {% if book_form.pub_date.errors %}<div class="col-md-3">{{ book_form.pub_date.errors }}</div>{% endif %}
               {% if book_form.month.errors %}<div class="col-md-3">{{ book_form.month.errors }}</div>{% endif %}
               {% if book_form.day.errors %}<div class="col-md-3">{{ book_form.day.errors }}</div>{% endif %}
             </div>
