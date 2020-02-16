@@ -42,6 +42,12 @@
             </div>
             
             <!--    Additional authors        -->
+            <div id="authors" class="collapse form-row">
+              {{ authors_fs.management_form }}
+              {% for author_form in authors_fs %}
+                <div class="col-md-3">{{ author_form.name|as_crispy_field }}</div>
+              {% endfor %}
+            </div>
             
             <!--    Publication date        -->
             <div class="form-row">

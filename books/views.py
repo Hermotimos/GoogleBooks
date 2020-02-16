@@ -25,13 +25,24 @@ def books_list_view(request):
 def books_add_view(request):
     if request.method == 'POST':
         first_author_form = FirstAuthorForm(data=request.POST)
-        # authors_formset = AuthorFormSet(data=request.POST)
+        authors_fs = AuthorFormSet(data=request.POST)
         book_form = BookForm(data=request.POST)
         language_form = LanguageForm(data=request.POST)
 
-        if first_author_form.is_valid() and language_form.is_valid():
+        if first_author_form.is_valid() and language_form.is_valid() and book_form.is_valid() and authors_fs.is_valid():
+
+            # referential integrity
             first_author_name = first_author_form.cleaned_data['name']
             first_author, _ = Author.objects.get_or_create(name=first_author_name)
+
+            more_authors = []
+            for form in authors_fs:
+                try:
+                    author_name = form.cleaned_data['name']
+                    author, _ = Author.objects.get_or_create(name=author_name)
+                    more_authors.append(author)
+                except KeyError:
+                    pass
 
             language_code = language_form.cleaned_data['code']
             language, _ = Language.objects.get_or_create(code=language_code)
@@ -40,11 +51,11 @@ def books_add_view(request):
             book.language = language
             book = book_form.save()
             book.authors.add(first_author)
-            # if more_authors:
-            #     book.authors.add(*list(more_authors))
 
-            print(book_form.cleaned_data)
+            if more_authors:
+                book.authors.add(*list(more_authors))
 
+            # remaining fields
             year = book_form.cleaned_data['year']
             month = book_form.cleaned_data['month'] or None
             day = book_form.cleaned_data['day'] or None
@@ -65,13 +76,13 @@ def books_add_view(request):
 
     else:
         first_author_form = FirstAuthorForm()
-        # authors_formset = AuthorFormSet()
+        authors_fs = AuthorFormSet()
         book_form = BookForm()
         language_form = LanguageForm()
 
     context = {
         'first_author_form': first_author_form,
-        # 'authors_formset': authors_formset,
+        'authors_fs': authors_fs,
         'book_form': book_form,
         'language_form': language_form
     }
