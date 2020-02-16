@@ -2,7 +2,8 @@ from django.shortcuts import render, redirect
 
 from django.contrib import messages
 from books.filters import BookFilter
-from books.forms import BooksSearchForm, BookForm, FirstAuthorForm, AuthorFormSet, LanguageForm
+from books.forms import (BooksSearchForm, BookForm, FirstAuthorForm,
+                         AuthorFormSet, LanguageForm)
 from books.models import Author, Book, Language
 
 
@@ -26,11 +27,13 @@ def books_add_view(request):
         book_form = BookForm(data=request.POST)
         language_form = LanguageForm(data=request.POST)
 
-        if first_author_form.is_valid() and language_form.is_valid() and book_form.is_valid() and authors_fs.is_valid():
-
+        if (first_author_form.is_valid() and language_form.is_valid()
+                and book_form.is_valid() and authors_fs.is_valid()):
+            
             # referential integrity
             first_author_name = first_author_form.cleaned_data['name']
-            first_author, _ = Author.objects.get_or_create(name=first_author_name)
+            first_author, _ \
+                = Author.objects.get_or_create(name=first_author_name)
 
             more_authors = []
             for form in authors_fs:
