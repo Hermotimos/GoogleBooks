@@ -11,88 +11,37 @@
   
   </header>
 
-  <div class="container">
+  <main role="main">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
     
-    <form method="GET">
-      {{ filter.form|crispy }}
-      <button type="submit" class="btn btn-dark">Search</button>
-    </form>
-    
-    <br>
-    <ul>
-      {% for book in filter.qs %}
-        <li class="pb-2">
-          {{ book.authors.all|join:', ' }},
-          <i>{{ book.title }}</i>,
-          {{ book.pub_date|slice:':4' }},
-          pp. {{ book.pages }}&ensp;
-          [{{ book.language }},
-          ISBN-{{ book.isbn_10 }},
-          ISBN-{{ book.isbn_13 }}]
+          <form method="GET">
+            {{ filter.form|crispy }}
+            <button type="submit" class="btn btn-dark">Search</button>
+          </form>
+          
           <br>
-          View cover at: <a href="{{ book.cover_url }}">{{ book.cover_url }}</a>
-        </li>
-      {% endfor %}
-    </ul>
-    
+          <ul>
+            {% for book in filter.qs %}
+              <li class="pb-2">
+                {{ book.authors.all|join:', ' }},
+                <i>{{ book.title }}</i>,
+                {{ book.pub_date|slice:':4' }},
+                pp. {{ book.pages }}&ensp;
+                [{{ book.language }},
+                ISBN-{{ book.isbn_10 }},
+                ISBN-{{ book.isbn_13 }}]
+                <br>
+                View cover at: <a href="{{ book.cover_url }}">{{ book.cover_url }}</a>
+              </li>
+            {% endfor %}
+          </ul>
+          
+        </div>
+      </div>
+    </div>
+  </main>
+  
 
-  </div>
-
-
-<!--  <main role="main">-->
-<!--    <div class="container">-->
-<!--      <div class="row">-->
-<!--        <div class="col-md-12">-->
-<!--          <form method="GET">    &lt;!&ndash;    enctype="multipart/form-data"   &ndash;&gt;-->
-<!--            {% csrf_token %}     &lt;!&ndash;    IS THIS NEEDED ?   &ndash;&gt;-->
-<!--            <fieldset>-->
-<!--              {{ form.authors }}<br>-->
-<!--              {{ form.authors.errors }}-->
-<!--        &lt;!&ndash;   OVERRIDE IN FORMS: authors           &ndash;&gt;-->
-<!--  -->
-<!--              {{ form.title }}<br>-->
-<!--              {{ form.title.errors }}-->
-<!--              -->
-<!--  &lt;!&ndash;              {{ form.pub_date }}<br>&ndash;&gt;-->
-<!--  &lt;!&ndash;              {{ form.pub_date.errors }}&ndash;&gt;-->
-<!--  &lt;!&ndash;              &ndash;&gt;-->
-<!--  &lt;!&ndash;              {{ form.pub_date2 }}<br>&ndash;&gt;-->
-<!--  &lt;!&ndash;              {{ form.pub_date2.errors }}&ndash;&gt;-->
-<!--  -->
-<!--              -->
-<!--              {{ form.language }}<br>-->
-<!--              {{ form.language.errors }}-->
-<!--            </fieldset>-->
-<!--            -->
-<!--          </form>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </main>-->
-
-
-<!--  <main role="main">-->
-<!--    <div class="container">-->
-<!--      <div class="row">-->
-<!--        <div class="col-md-12">-->
-<!--          {% for book in books %}-->
-<!--            {{ book }}-->
-<!--          {% endfor %}-->
-<!--          -->
-<!--          <form method="GET" action="">-->
-<!--            <input type="text" name="title" placeholder="Tytuł" size="30"><br>-->
-<!--            <input type="text" name="author" placeholder="Autor" size="30"><br>-->
-<!--            <input type="text" name="language" placeholder="Język" size="30"><br>-->
-<!--            <input type="text" name="publication-after" placeholder="Rok publikacji (od)" size="15">-->
-<!--            <input type="text" name="publication-before" placeholder="Rok publikacji (do)" size="15">-->
-<!--            -->
-<!--            <div>-->
-<!--              <button name="button1" class="btn btn-dark" type="submit" value="sumbit1">Wyszukaj</button>-->
-<!--            </div>-->
-<!--          </form>-->
-<!--  -->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </main>-->
 {% endblock content %}
