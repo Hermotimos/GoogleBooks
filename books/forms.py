@@ -5,12 +5,6 @@ from django import forms
 from books.models import Author, Book, Language
 
 
-class BooksSearchForm(forms.ModelForm):
-    class Meta:
-        model = Book
-        fields = ['authors', 'title', 'language']
-
-
 class FirstAuthorForm(forms.Form):
     name = forms.CharField(max_length=100, required=True)
 

@@ -2,19 +2,16 @@ from django.shortcuts import render, redirect
 
 from django.contrib import messages
 from books.filters import BookFilter
-from books.forms import (BooksSearchForm, BookForm, FirstAuthorForm,
-                         AuthorFormSet, LanguageForm)
+from books.forms import BookForm, FirstAuthorForm, AuthorFormSet, LanguageForm
 from books.models import Author, Book, Language
 
 
 def books_list_view(request):
     books = Book.objects.all()
-    form = BooksSearchForm()
     filter_ = BookFilter(request.GET, queryset=books)
 
     context = {
         'books': books,
-        'form': form,
         'filter': filter_,
     }
     return render(request, 'books_list.html', context)
