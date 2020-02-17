@@ -21,5 +21,5 @@ class BookFilter(filters.FilterSet):
             'authors',
             'language',
             'pub_date__gte',
-            'pub_date__gte',
+            'pub_date__lte',
         ]
