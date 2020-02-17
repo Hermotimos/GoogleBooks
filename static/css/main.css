@@ -1,7 +1,7 @@
 body {
   background: #fafafa;
-          color: #444444;
-
+  color: #444444;
+  margin-top: 5rem;
 /*
   background-image: url("../img/sky.jpg");
   background-repeat: no-repeat;
@@ -15,7 +15,10 @@ body {
   src: url("../fonts/IMFeGPrm29P.ttf");
 }
 
-* {font-family: 'IM Fell Great Primer', serif;}
+* {
+  font-family: 'IM Fell Great Primer', serif;
+  color: #444444;
+}
 
 /*
 .small-caps {font-variant: small-caps;}
@@ -23,6 +26,13 @@ body {
 
 ul.bullets-1 li {list-style: "✧";}
 
-ul[class^=bullets] > li > * {
-    padding-left: 0.5rem;
-}
+ul[class^=bullets] > li > * {padding-left: 0.5rem;}
+
+.bg-nav {background-color: #075970;}
+
+.site-header .navbar-nav .nav-link {color: #cbd5db;}
+.site-header .navbar-nav .nav-link:hover {color: #ffffff;}
+.site-header .navbar-nav .nav-link.active {font-weight: 500;}
+
+
+.btn-bottom button {margin-top: 23px}
