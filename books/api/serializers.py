@@ -20,7 +20,7 @@ class BookSerializer(serializers.HyperlinkedModelSerializer):
             'isbn_10',
             'isbn_13',
             'cover_url',
-            'language'
+            'language',
         ]
 
 

@@ -10,5 +10,5 @@ urlpatterns = [
     path('', views.books_list_view, name='list'),
     path('add/', views.books_add_view, name='add'),
 
-    path('api/', include(router.urls))
+    path('api/', include(router.urls)),
 ]

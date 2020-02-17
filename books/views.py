@@ -15,7 +15,7 @@ def books_list_view(request):
     context = {
         'books': books,
         'form': form,
-        'filter': filter_
+        'filter': filter_,
     }
     return render(request, 'books_list.html', context)
 
@@ -84,6 +84,6 @@ def books_add_view(request):
         'first_author_form': first_author_form,
         'authors_fs': authors_fs,
         'book_form': book_form,
-        'language_form': language_form
+        'language_form': language_form,
     }
     return render(request, 'books_add.html', context)
