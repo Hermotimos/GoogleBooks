@@ -9,90 +9,86 @@
 
 
 {% block content %}
-
   <header>
   
   </header>
-
-  <main role="main">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          
-          <!--  MESSAGES  -->
-          {% if messages %}
-            {% for message in messages %}
-              <div class="alert alert-{{ message.tags }}">
-                  {{ message }}
-              </div>
-            {% endfor %}
-          {% endif %}
-          
-          <!--  FORMS        -->
-          <form method="POST">
-            {% csrf_token %}
-            
-            <!--    Title        -->
-            <div class="form-row">
-              <div class="col-md-12">{{ book_form.title|as_crispy_field }}</div>
-<!--              {% if book_form.title.errors %}<div class="col-md-12 alert alert-danger">{{ book_form.title.errors }}</div>{% endif %}-->
-            </div>
-            
-            <!--    First author        -->
-            <div class="form-row">
-              <div class="col-md-3">{{ first_author_form.name|as_crispy_field }}</div>
-<!--              {% if first_author_form.name.errors %}<div class="col-md-4">{{ first_author_form.name.errors }}</div>{% endif %}-->
-              <div class="col-md-3">
-                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#authors" aria-expanded="false" aria-controls="authors">
-                  Add more authors
-                </button>
-              </div>
-            </div>
-            
-            <!--    Additional authors        -->
-            <div id="authors" class="collapse form-row">
-              {{ authors_fs.management_form }}
-              {% for author_form in authors_fs %}
-                <div class="col-md-3">{{ author_form.name|as_crispy_field }}</div>
-              {% endfor %}
-<!--              {% for author_form in authors_fs %}-->
-<!--                {% if author_form.name.errors %}<div class="col-md-4">{{ author_form.name.errors }}</div>{% endif %}-->
-<!--              {% endfor %}-->
-            </div>
-            
-            <!--    Publication date        -->
-            <div class="form-row">
-              <div class="col-md-3">{{ book_form.year|as_crispy_field }}</div>
-              <div class="col-md-3">{{ book_form.month|as_crispy_field }}</div>
-              <div class="col-md-3">{{ book_form.day|as_crispy_field }}</div>
-<!--              {% if book_form.pub_date.errors %}<div class="col-md-3">{{ book_form.pub_date.errors }}</div>{% endif %}-->
-<!--              {% if book_form.month.errors %}<div class="col-md-3 ror">{{ book_form.month.errors }}</div>{% endif %}-->
-<!--              {% if book_form.day.errors %}<div class="col-md-3">{{ book_form.day.errors }}</div>{% endif %}-->
-            </div>
-            
-            <!--    Remaining fields        -->
-            <div class="form-row">
-              <div class="col-md-3">{{ book_form.pages|as_crispy_field }}</div>
-              <div class="col-md-3">{{ book_form.isbn_10|as_crispy_field }}</div>
-              <div class="col-md-3">{{ book_form.isbn_13|as_crispy_field }}</div>
-<!--              {% if book_form.pages.errors %}<div class="col-md-3">{{ book_form.pages.errors }}</div>{% endif %}-->
-<!--              {% if book_form.isbn_10.errors %}<div class="col-md-3">{{ book_form.isbn_10.errors }}</div>{% endif %}-->
-<!--              {% if book_form.isbn_13.errors %}<div class="col-md-3">{{ book_form.isbn_13.errors }}</div>{% endif %}-->
-            </div>
-            <div class="form-row">
-              <div class="col-md-3">{{ language_form.code|as_crispy_field }}</div>
-              <div class="col-md-3">{{ book_form.cover_url|as_crispy_field }}</div>
-<!--              {% if language_form.code.errors %}<div class="col-md-3">{{ language_form.code.errors }}</div>{% endif %}-->
-<!--              {% if book_form.cover_url.errors %}<div class="col-md-3">{{ book_form.cover_url.errors }}</div>{% endif %}-->
-            </div>
-            <!--   Submit     -->
-            <div>
-              <input class="btn btn-dark" type="submit" value="Dodaj"/>
-            </div>
-            
-          </form>
+  
+  <article>
+    <div class="col-md-12">
+      
+      <!--  MESSAGES  -->
+      {% if messages %}
+        {% for message in messages %}
+          <div class="alert alert-{{ message.tags }}">
+              {{ message }}
+          </div>
+        {% endfor %}
+      {% endif %}
+      
+      <!--  FORMS        -->
+      <form method="POST">
+        {% csrf_token %}
+        
+        <!--    Title        -->
+        <div class="form-row">
+          <div class="col-md-12 form-group">{{ book_form.title|as_crispy_field }}</div>
+      <!--              {% if book_form.title.errors %}<div class="col-md-12 alert alert-danger">{{ book_form.title.errors }}</div>{% endif %}-->
         </div>
-      </div>
+        
+        <!--    First author        -->
+        <div class="form-row">
+          <div class="col-md-3 form-group mr-5">{{ first_author_form.name|as_crispy_field }}</div>
+      <!--              {% if first_author_form.name.errors %}<div class="col-md-4">{{ first_author_form.name.errors }}</div>{% endif %}-->
+          <div class="col-md-3 btn-bottom">
+            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#authors" aria-expanded="false" aria-controls="authors">
+              Add authors
+            </button>
+          </div>
+        </div>
+
+<!--            Additional authors-->
+        <div id="authors" class="collapse form-row">
+          {{ authors_fs.management_form }}
+          {% for author_form in authors_fs %}
+            <div class="col-md-3 form-group">{{ author_form.name|as_crispy_field }}</div>
+          {% endfor %}
+      <!--              {% for author_form in authors_fs %}-->
+      <!--                {% if author_form.name.errors %}<div class="col-md-4">{{ author_form.name.errors }}</div>{% endif %}-->
+      <!--              {% endfor %}-->
+        </div>
+        
+        <!--    Publication date        -->
+        <div class="form-row">
+          <div class="col-md-4 form-group">{{ book_form.year|as_crispy_field }}</div>
+          <div class="col-md-4 form-group">{{ book_form.month|as_crispy_field }}</div>
+          <div class="col-md-4 form-group">{{ book_form.day|as_crispy_field }}</div>
+      <!--              {% if book_form.pub_date.errors %}<div class="col-md-3">{{ book_form.pub_date.errors }}</div>{% endif %}-->
+      <!--              {% if book_form.month.errors %}<div class="col-md-3 ror">{{ book_form.month.errors }}</div>{% endif %}-->
+      <!--              {% if book_form.day.errors %}<div class="col-md-3">{{ book_form.day.errors }}</div>{% endif %}-->
+        </div>
+        
+        <!--    Remaining fields        -->
+        <div class="form-row">
+          <div class="col-md-4 form-group">{{ book_form.pages|as_crispy_field }}</div>
+          <div class="col-md-4 form-group">{{ book_form.isbn_10|as_crispy_field }}</div>
+          <div class="col-md-4 form-group">{{ book_form.isbn_13|as_crispy_field }}</div>
+      <!--              {% if book_form.pages.errors %}<div class="col-md-3">{{ book_form.pages.errors }}</div>{% endif %}-->
+      <!--              {% if book_form.isbn_10.errors %}<div class="col-md-3">{{ book_form.isbn_10.errors }}</div>{% endif %}-->
+      <!--              {% if book_form.isbn_13.errors %}<div class="col-md-3">{{ book_form.isbn_13.errors }}</div>{% endif %}-->
+        </div>
+        <div class="form-row">
+          <div class="col-md-4 form-group">{{ language_form.code|as_crispy_field }}</div>
+          <div class="col-md-4 form-group">{{ book_form.cover_url|as_crispy_field }}</div>
+      <!--              {% if language_form.code.errors %}<div class="col-md-3">{{ language_form.code.errors }}</div>{% endif %}-->
+      <!--              {% if book_form.cover_url.errors %}<div class="col-md-3">{{ book_form.cover_url.errors }}</div>{% endif %}-->
+        </div>
+        
+        <!--   Submit     -->
+        <div>
+          <input class="btn btn-dark" type="submit" value="Dodaj"/>
+        </div>
+        
+      </form>
     </div>
-  </main>
+  </article>
 {% endblock content %}

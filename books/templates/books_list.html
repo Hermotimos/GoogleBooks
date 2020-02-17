@@ -9,42 +9,36 @@
 
 
 {% block content %}
-
   <header>
   
   </header>
-
-  <main role="main">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-    
-          <form method="GET">
-            {{ filter.form|crispy }}
-            <button type="submit" class="btn btn-dark">Search</button>
-          </form>
-          
-          <br>
-          <ul>
-            {% for book in filter.qs %}
-              <li class="pb-2">
-                {{ book.authors.all|join:', ' }},
-                <i>{{ book.title }}</i>,
-                {{ book.pub_date|slice:':4' }},
-                pp. {{ book.pages }}&ensp;
-                [{{ book.language }},
-                ISBN-{{ book.isbn_10 }},
-                ISBN-{{ book.isbn_13 }}]
-                <br>
-                View cover at: <a href="{{ book.cover_url }}">{{ book.cover_url }}</a>
-              </li>
-            {% endfor %}
-          </ul>
-          
-        </div>
-      </div>
-    </div>
-  </main>
   
+  <article>
+    <div class="col-md-12">
+    
+      <form method="GET">
+        {{ filter.form|crispy }}
+        <button type="submit" class="btn btn-dark">Search</button>
+      </form>
+      
+      <br>
+      <ul>
+        {% for book in filter.qs %}
+          <li class="pb-2">
+            {{ book.authors.all|join:', ' }},
+            <i>{{ book.title }}</i>,
+            {{ book.pub_date|slice:':4' }},
+            pp. {{ book.pages }}&ensp;
+            [{{ book.language }},
+            ISBN-{{ book.isbn_10 }},
+            ISBN-{{ book.isbn_13 }}]
+            <br>
+            View cover at: <a href="{{ book.cover_url }}">{{ book.cover_url }}</a>
+          </li>
+        {% endfor %}
+      </ul>
+      
+    </div>
+  </article>
 
 {% endblock content %}
