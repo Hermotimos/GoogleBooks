@@ -1,0 +1,18 @@
+{% load static %}
+
+<div class="container">
+    <a class="navbar-brand mb-0" href="{% url 'list' %}">My GoogleBooks Collection</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse ml-3" id="navbarToggle">
+        <div class="navbar-nav mr-auto">
+            <a class="nav-item nav-link mx-3" href="{% url 'add' %}">Add a book</a>
+            <a class="nav-item nav-link mx-3" href="#">Import books</a>
+        </div>
+        <div class="navbar-nav">
+            <a class="nav-item nav-link" href="{% url 'book-list' %}">REST API</a>
+        </div>
+    </div>
+</div>
