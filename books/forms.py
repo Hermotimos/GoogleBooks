@@ -21,7 +21,7 @@ class AuthorForm(forms.Form):
         self.fields['name'].label = 'Author'
 
 
-AuthorFormSet = forms.formset_factory(AuthorForm, extra=4)
+AuthorFormSet = forms.formset_factory(AuthorForm, extra=3)
 
 
 class LanguageForm(forms.Form):

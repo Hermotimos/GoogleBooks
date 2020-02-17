@@ -3,7 +3,7 @@ from django.urls import resolve, reverse
 
 from books import views
 from books.filters import BookFilter
-from books.forms import (FirstAuthorForm, AuthorForm, AuthorFormSet, BookForm,
+from books.forms import (FirstAuthorForm, AuthorFormSet, BookForm,
                          LanguageForm)
 from books.models import Author, Book, Language
 
