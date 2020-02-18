@@ -50,5 +50,36 @@
       </div>
       
     </form>
+    
+    <br>
+    <ul>
+      {% for book in books_list %}
+        <li class="pb-3">
+          {% if book.authors.all %} {{ book.authors.all|join:', ' }}, {% endif %}
+          {% if book.title %} <i>{{ book.title }}</i>, {% endif %}
+          
+          {% if book.pub_date and book.pages %}
+            pub. {{ book.pub_date|slice:':4' }}, pp. {{ book.pages }}.
+          {% elif book.pub_date %}
+            pub. {{ book.pub_date|slice:':4' }}.
+          {% elif book.pages %}
+            , pp. {{ book.pages }}
+          {% endif %}
+          
+          {% if book.language and book.isbn %}
+            [{{ book.language }}, ISBN-{{ book.isbn }}]
+          {% elif book.language %}
+            [{{ book.language }}]
+          {% elif book.isbn %}
+            [{{ book.isbn }}]
+          {% endif %}
+          <br>
+          {% if book.cover_url %}
+            Cover: <a href="{{ book.cover_url }}">{{ book.cover_url }}</a>
+          {% endif %}
+        </li>
+      {% endfor %}
+    </ul>
+
   </div>
 {% endblock content %}
