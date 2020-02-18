@@ -1,6 +1,6 @@
 import django_filters as filters
 
-from books.models import Author, Book, Language
+from books.models import Author, Language
 
 
 class BookFilter(filters.FilterSet):
@@ -13,13 +13,3 @@ class BookFilter(filters.FilterSet):
                                          lookup_expr='gte')
     pub_date__lte = filters.NumberFilter(field_name='pub_date',
                                          lookup_expr='lte')
-
-    # class Meta:
-    #     model = Book
-    #     fields = [
-    #         # 'title',
-    #         # 'authors',
-    #         # 'language',
-    #         # 'pub_date__gte',
-    #         # 'pub_date__lte',
-    #     ]

@@ -12,15 +12,6 @@ class AuthorSerializer(serializers.ModelSerializer):
 class BookSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Book
-        # fields = [
-        #     'title',
-        #     'authors',
-        #     'pub_date',
-        #     'pages',
-        #     'isbn',
-        #     'cover_url',
-        #     'language',
-        # ]
         fields = '__all__'
         
 

@@ -7,7 +7,6 @@ from books.filters import BookFilter
 from books.forms import (BookForm, FirstAuthorForm, AuthorFormSet,
                          LanguageForm, BookImportForm)
 from books.models import Author, Book, Language
-from books_project.credentials import GOOGLE_API_KEY
 
 
 def books_import_view(request):
