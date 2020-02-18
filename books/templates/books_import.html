@@ -12,15 +12,6 @@
   
   <div class="col-md-12">
     
-    <!--  MESSAGES  -->
-    {% if messages %}
-      {% for message in messages %}
-        <div class="alert alert-{{ message.tags }}">
-            {{ message }}
-        </div>
-      {% endfor %}
-    {% endif %}
-    
     <!--  FORM        -->
     <form method="POST">
       {% csrf_token %}
@@ -52,6 +43,15 @@
     </form>
     
     <br>
+    <!--  MESSAGES  -->
+    {% if messages %}
+      {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">
+            {{ message }}
+        </div>
+      {% endfor %}
+    {% endif %}
+
     <ul>
       {% for book in books_list %}
         <li class="pb-3">
