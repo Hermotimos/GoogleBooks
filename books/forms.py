@@ -56,21 +56,37 @@ class BookForm(forms.ModelForm):
 
 class BookImportForm(forms.Form):
     q = forms.CharField()
-    intitle = forms.CharField()
-    inauthor = forms.CharField()
-    inpublisher = forms.CharField()
-    subject = forms.CharField()
-    isbn = forms.CharField()
-    lccn = forms.CharField()
-    oclc = forms.CharField()
+    intitle = forms.CharField(required=False)
+    inauthor = forms.CharField(required=False)
+    inpublisher = forms.CharField(required=False)
+    subject = forms.CharField(required=False)
+    isbn = forms.CharField(max_length=13, required=False)
+    lccn = forms.CharField(required=False)
+    oclc = forms.CharField(required=False)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        
         self.fields['q'].label = 'Keyword(s):'
-        self.fields['intitle'].label = 'Author\'s name contains:'
-        self.fields['inauthor'].label = 'Author\'s name contains:'
-        self.fields['inpublisher'].label = 'Publisher\'s name contains:'
-        self.fields['subject'].label = 'Book category contains:'
+        self.fields['q'].widget.attrs = {'size': 25}
+        
+        self.fields['intitle'].label = 'In title:'
+        self.fields['intitle'].widget.attrs = {'size': 25}
+        
+        self.fields['inauthor'].label = 'In author:'
+        self.fields['inauthor'].widget.attrs = {'size': 25}
+        
+        self.fields['inpublisher'].label = 'In publisher:'
+        self.fields['inpublisher'].widget.attrs = {'size': 25}
+        
+        self.fields['subject'].label = 'In category:'
+        self.fields['subject'].widget.attrs = {'size': 25}
+        
         self.fields['isbn'].label = 'ISBN:'
+        self.fields['isbn'].widget.attrs = {'size': 25}
+        
         self.fields['lccn'].label = 'Library of Congress Control Number:'
+        self.fields['lccn'].widget.attrs = {'size': 25}
+        
         self.fields['oclc'].label = 'Online Computer Library Center number:'
+        self.fields['oclc'].widget.attrs = {'size': 25}

@@ -24,25 +24,27 @@
     <!--  FORM        -->
     <form method="POST">
       {% csrf_token %}
-      
       <div class="form-row">
-        <div class="col-md-4 form-group">{{ form.q|as_crispy_field }}</div>
-        <div class="col-md-4 form-group">{{ form.intitle|as_crispy_field }}</div>
-        <div class="col-md-4 form-group">{{ form.inauthor|as_crispy_field }}</div>
+
+        <div class="col-sm-6 col-md-4 col-lg-3 form-group">{{ form.q|as_crispy_field }}</div>
+        <div class="col-sm-6 col-md-4 col-lg-3 form-group">{{ form.intitle|as_crispy_field }}</div>
+        <div class="col-sm-6 col-md-4 col-lg-3 form-group">{{ form.inauthor|as_crispy_field }}</div>
+      </div>
+      <div class="form-row">
+        <div class="col-sm-6 col-md-4 col-lg-3 form-group">{{ form.inpublisher|as_crispy_field }}</div>
+        <div class="col-sm-6 col-md-4 col-lg-3 form-group">{{ form.subject|as_crispy_field }}</div>
+        <div class="col-sm-6 col-md-4 col-lg-3 form-group">{{ form.isbn|as_crispy_field }}</div>
+      </div>
+      <br>
+      <div class="form-row">
+        <div class="col-sm-6 col-md-4 form-group">{{ form.lccn|as_crispy_field }}</div>
+      </div>
+      <br>
+      <div class="form-row">
+        <div class="col-sm-6 col-md-4 form-group">{{ form.oclc|as_crispy_field }}</div>
       </div>
       
-      <div class="form-row">
-        <div class="col-md-4 form-group">{{ form.inpublisher|as_crispy_field }}</div>
-        <div class="col-md-4 form-group">{{ form.subject|as_crispy_field }}</div>
-        <div class="col-md-4 form-group">{{ form.isbn|as_crispy_field }}</div>
-      </div>
-      
-      <div class="form-row">
-        <div class="col-md-4 form-group">{{ form.lccn|as_crispy_field }}</div>
-        <div class="col-md-4 form-group">{{ form.oclc|as_crispy_field }}</div>
-      </div>
-      
-      <!--   Submit     -->
+      <br>
       <div>
         <input class="btn btn-dark" type="submit" value="Import"/>
       </div>
