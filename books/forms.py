@@ -37,10 +37,11 @@ def get_current_year():
 
 
 class BookForm(forms.ModelForm):
-    pages = forms.IntegerField(min_value=1)
-    isbn = forms.CharField(min_length=13, max_length=13)
+    pages = forms.IntegerField(min_value=1, required=False)
+    isbn = forms.CharField(min_length=13, max_length=13, required=False)
 
-    year = forms.IntegerField(min_value=1450, max_value=get_current_year)
+    year = forms.IntegerField(min_value=1450, max_value=get_current_year,
+                              required=False)
     month = forms.IntegerField(min_value=1, max_value=12, required=False)
     day = forms.IntegerField(min_value=1, max_value=31, required=False)
 
