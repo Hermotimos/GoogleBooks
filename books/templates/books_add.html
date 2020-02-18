@@ -65,11 +65,9 @@
       <!--    Remaining fields        -->
       <div class="form-row">
         <div class="col-md-4 form-group">{{ book_form.pages|as_crispy_field }}</div>
-        <div class="col-md-4 form-group">{{ book_form.isbn_10|as_crispy_field }}</div>
-        <div class="col-md-4 form-group">{{ book_form.isbn_13|as_crispy_field }}</div>
+        <div class="col-md-4 form-group">{{ book_form.isbn|as_crispy_field }}</div>
     <!--              {% if book_form.pages.errors %}<div class="col-md-3">{{ book_form.pages.errors }}</div>{% endif %}-->
-    <!--              {% if book_form.isbn_10.errors %}<div class="col-md-3">{{ book_form.isbn_10.errors }}</div>{% endif %}-->
-    <!--              {% if book_form.isbn_13.errors %}<div class="col-md-3">{{ book_form.isbn_13.errors }}</div>{% endif %}-->
+    <!--              {% if book_form.isbn.errors %}<div class="col-md-3">{{ book_form.isbn.errors }}</div>{% endif %}-->
       </div>
       <div class="form-row">
         <div class="col-md-4 form-group">{{ language_form.code|as_crispy_field }}</div>

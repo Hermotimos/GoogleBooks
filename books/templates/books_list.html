@@ -24,9 +24,7 @@
           <i>{{ book.title }}</i>,
           {{ book.pub_date|slice:':4' }},
           pp. {{ book.pages }}&ensp;
-          [{{ book.language }},
-          ISBN-{{ book.isbn_10 }},
-          ISBN-{{ book.isbn_13 }}]
+          [{{ book.language }}, ISBN-{{ book.isbn }}]
           <br>
           View cover at: <a href="{{ book.cover_url }}">{{ book.cover_url }}</a>
         </li>

@@ -17,8 +17,7 @@ class BookSerializer(serializers.HyperlinkedModelSerializer):
         #     'authors',
         #     'pub_date',
         #     'pages',
-        #     'isbn_10',
-        #     'isbn_13',
+        #     'isbn',
         #     'cover_url',
         #     'language',
         # ]

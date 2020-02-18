@@ -21,8 +21,7 @@ class BooksListViewTest(TestCase):
             title='Test title 1',
             pub_date='2000',
             pages=200,
-            isbn_10='0575079215',
-            isbn_13='9780575079212',
+            isbn='9780575079212',
             cover_url='https://www.abebooks.com/book-search/author/'
                       'PHILIP-K-DICK?cm_sp=brcr-_-bdp-_-author',
             language=cls.language_1
@@ -31,8 +30,7 @@ class BooksListViewTest(TestCase):
             title='Title test 2',
             pub_date='1999',
             pages=199,
-            isbn_10='8834730313',
-            isbn_13='9788834730317',
+            isbn='9788834730317',
             cover_url='https://www.abebooks.com/9788834730317/'
                       'Ubik-8834730313/plp',
             language=cls.language_2
@@ -59,8 +57,7 @@ class BooksListViewTest(TestCase):
             self.assertContains(response, book.title)
             self.assertContains(response, book.pub_date)
             self.assertContains(response, book.pages)
-            self.assertContains(response, book.isbn_10)
-            self.assertContains(response, book.isbn_13)
+            self.assertContains(response, book.isbn)
             self.assertContains(response, book.cover_url)
             self.assertContains(response, book.language.code)
 
@@ -165,8 +162,7 @@ class BooksAddViewTest(TestCase):
             'month': '',
             'day': '',
             'pages': '200',
-            'isbn_10': '0575079215',
-            'isbn_13': '9780575079212',
+            'isbn': '9780575079212',
             'cover_url': 'http://127.0.0.1:8000/',
         }
         self.assertTrue(Book.objects.count() == 0)
@@ -203,8 +199,7 @@ class BooksAddViewTest(TestCase):
             'month': '',
             'day': '',
             'pages': '-200',
-            'isbn_10': '11111111111111111111',
-            'isbn_13': '11111111111111111111',
+            'isbn': '11111111111111111111',
             'cover_url': 'not an url',
         }
         self.assertTrue(Book.objects.count() == 0)
