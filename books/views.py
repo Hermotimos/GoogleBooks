@@ -25,7 +25,6 @@ def books_import_view(request):
     return render(request, 'books_import.html', context)
 
 
-
 def books_list_view(request):
     books = Book.objects.all()
     filter_ = BookFilter(request.GET, queryset=books)
@@ -68,7 +67,6 @@ def books_add_view(request):
             book.language = language
             book = book_form.save()
             book.authors.add(first_author)
-
             if more_authors:
                 book.authors.add(*list(more_authors))
 
@@ -93,9 +91,6 @@ def books_add_view(request):
 
             messages.info(request, f'New book has been added!')
             return redirect('add')
-        else:
-            print('not valid')
-
     else:
         first_author_form = FirstAuthorForm()
         authors_fs = AuthorFormSet()
