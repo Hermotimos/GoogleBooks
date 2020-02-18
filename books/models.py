@@ -16,7 +16,7 @@ class Language(models.Model):
 
 
 class Book(models.Model):
-    title = models.CharField(max_length=500)
+    title = models.TextField(max_length=500)
     authors = models.ManyToManyField(Author, related_name='books')
     pub_date = models.CharField(max_length=10)
     pages = models.PositiveSmallIntegerField()
