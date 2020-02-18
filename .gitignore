@@ -1,16 +1,11 @@
 credentials.py
 
-.idea
 migrations
 virtualenv
+
+db.sqlite3
+.idea
 
 *.pyc
 *~
 __pycache__
-
-
-
-
-
-
-
