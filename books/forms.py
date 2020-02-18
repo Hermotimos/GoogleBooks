@@ -52,3 +52,25 @@ class BookForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['title'].widget.attrs = {'size': 70}
+
+
+class BookImportForm(forms.Form):
+    q = forms.CharField()
+    intitle = forms.CharField()
+    inauthor = forms.CharField()
+    inpublisher = forms.CharField()
+    subject = forms.CharField()
+    isbn = forms.CharField()
+    lccn = forms.CharField()
+    oclc = forms.CharField()
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['q'].label = 'Keyword(s):'
+        self.fields['intitle'].label = 'Author\'s name contains:'
+        self.fields['inauthor'].label = 'Author\'s name contains:'
+        self.fields['inpublisher'].label = 'Publisher\'s name contains:'
+        self.fields['subject'].label = 'Book category contains:'
+        self.fields['isbn'].label = 'ISBN:'
+        self.fields['lccn'].label = 'Library of Congress Control Number:'
+        self.fields['oclc'].label = 'Online Computer Library Center number:'

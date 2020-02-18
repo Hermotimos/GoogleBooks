@@ -1,9 +1,30 @@
+import requests
+
 from django.shortcuts import render, redirect
 from django.contrib import messages
 
 from books.filters import BookFilter
-from books.forms import BookForm, FirstAuthorForm, AuthorFormSet, LanguageForm
+from books.forms import (BookForm, FirstAuthorForm, AuthorFormSet,
+                         LanguageForm, BookImportForm)
 from books.models import Author, Book, Language
+from books_project.credentials import GOOGLE_API_KEY
+
+
+def books_import_view(request):
+    if request.method == 'POST':
+        form = BookImportForm(data=request.POST)
+        
+        if form.is_valid():
+            pass
+    
+    else:
+        form = BookImportForm()
+
+    context = {
+        'form': form,
+    }
+    return render(request, 'books_import.html', context)
+
 
 
 def books_list_view(request):

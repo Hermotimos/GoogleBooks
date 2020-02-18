@@ -11,6 +11,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.books_list_view, name='list'),
     path('add/', views.books_add_view, name='add'),
+    path('import/', views.books_import_view, name='import'),
 
     path('api/', include(router.urls)),
 ]
