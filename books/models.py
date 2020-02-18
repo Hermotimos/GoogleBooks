@@ -27,7 +27,7 @@ class Book(models.Model):
     pub_date = models.CharField(max_length=10, blank=True, null=True)
     pages = models.PositiveSmallIntegerField(blank=True, null=True)
     isbn = models.CharField(max_length=13, unique=True, blank=True, null=True)
-    cover_url = models.URLField(blank=True, null=True)
+    cover_url = models.URLField(unique=True, blank=True, null=True)
     language = models.ForeignKey(Language, on_delete=models.CASCADE,
                                  blank=True, null=True)
 
@@ -44,20 +44,22 @@ class Book(models.Model):
             models.UniqueConstraint(
                 fields=['title', 'pub_date', 'pages', 'cover_url'],
                 name='unique-book-modalities',
-            )
+            ),
         ]
 
     def __str__(self):
         return self.title
 
     def save(self, *args, **kwargs):
-        """Save blank 'isbn' field as None (NULL in db) instead of ''.
+        """Save blank fields as None (NULL in db) instead of ''.
         
         Overrides default saving of blank fields as empty strings.
         Database treats two empty strings as equal, which isn't true for NULLs.
-        This override enables saving multiple Book objects without ISBN
-        while using 'isbn' for UNIQUE check in the database.
+        This override enables saving multiple Book objects without ISBN or
+        cover_url while using those fields for UNIQUE check in the database.
         """
         if not self.isbn:
             self.isbn = None
+        if not self.cover_url:
+            self.cover_url = None
         super().save(*args, **kwargs)
