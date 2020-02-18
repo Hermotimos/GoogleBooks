@@ -28,14 +28,24 @@ class Book(models.Model):
     pages = models.PositiveSmallIntegerField(blank=True, null=True)
     isbn = models.CharField(max_length=13, unique=True, blank=True, null=True)
     cover_url = models.URLField(blank=True, null=True)
-    language = models.ForeignKey(Language, on_delete=models.CASCADE)
+    language = models.ForeignKey(Language, on_delete=models.CASCADE,
+                                 blank=True, null=True)
 
     class Meta:
+        """Put constraint on combination of model fields.
+        
+        Ex. https://www.googleapis.com/books/v1/volumes?q=Hobbit
+        results in multiple imports of:
+        'John Ronald Reuel Tolkien, Hobbit czyli Tam i z powrotem,
+        pub. 1985, pp. 233 [pl] '
+        """
         ordering = ['authors__name']
-        # necessary to avoid duplicates when book has no isbn
-        # constraints = [
-        #     models.UniqueConstraint(fields=['title', ])
-        # ]
+        constraints = [
+            models.UniqueConstraint(
+                fields=['title', 'pub_date', 'pages', 'cover_url'],
+                name='unique-book-modalities',
+            )
+        ]
 
     def __str__(self):
         return self.title

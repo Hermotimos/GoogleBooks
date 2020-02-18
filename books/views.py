@@ -1,7 +1,8 @@
 import json
 
-from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.db import IntegrityError
+from django.shortcuts import render, redirect
 
 import requests
 from requests import Request
@@ -13,10 +14,12 @@ from books.models import Author, Book, Language
 
 
 def books_import_view(request):
+    books_list = []
     if request.method == 'POST':
         form = BookImportForm(data=request.POST)
         
         if form.is_valid():
+            # ----- Retrieve JSON data from API -----
             terms = {}
             for k, v in form.cleaned_data.items():
                 if v:
@@ -29,6 +32,7 @@ def books_import_view(request):
             url = prep.url.replace('&', '+')
             response = requests.get(url)
             
+            # ----- Parse JSON data -----
             data = json.loads(response.text)
             added_cnt = 0
             for item in data['items']:
@@ -73,23 +77,34 @@ def books_import_view(request):
                 except KeyError:
                     cover_url = ''
 
-                language_obj, _ = Language.objects.get_or_create(code=language)
-                book, added = Book.objects.get_or_create(
-                    title=title,
-                    pub_date=pub_date,
-                    pages=pages,
-                    language=language_obj,
-                    isbn=isbn,
-                    cover_url=cover_url
-                )
-                if added:
-                    added_cnt += 1
-                    authors_objs = []
-                    for name in authors_list:
-                        author, _ = Author.objects.get_or_create(name=name)
-                        authors_objs.append(author)
-                    book.authors.set(authors_objs)
-
+                # ----- Populate database with parsed data -----
+                
+                try:
+                    book, added = Book.objects.get_or_create(
+                        title=title,
+                        pub_date=pub_date,
+                        pages=pages,
+                        isbn=isbn,
+                        cover_url=cover_url
+                    )
+                    if added:
+                        added_cnt += 1
+                        
+                        language_obj, _ = Language.objects.get_or_create(
+                            code=language)
+                        book.language = language_obj
+                        
+                        authors_objs = []
+                        for name in authors_list:
+                            author, _ = Author.objects.get_or_create(name=name)
+                            authors_objs.append(author)
+                        book.authors.set(authors_objs)
+                        
+                        books_list.append(book)
+                        print(books_list)
+                except IntegrityError:
+                    pass
+                
             messages.info(request,
                           f'{added_cnt} books added to your collection!')
     else:
@@ -97,6 +112,7 @@ def books_import_view(request):
 
     context = {
         'form': form,
+        'books_list': books_list
     }
     return render(request, 'books_import.html', context)
 
