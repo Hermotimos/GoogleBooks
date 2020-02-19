@@ -2,6 +2,7 @@ from django.db import models
 
 
 class Author(models.Model):
+    """Model for authors in authors-books many-to-many relationship."""
     name = models.CharField(max_length=100, unique=True)
 
     class Meta:
@@ -12,6 +13,7 @@ class Author(models.Model):
 
 
 class Language(models.Model):
+    """Model for languages in languages-books many-to-many relationship."""
     code = models.CharField(max_length=2, unique=True)
     
     class Meta:
@@ -22,6 +24,7 @@ class Language(models.Model):
 
 
 class Book(models.Model):
+    """Main model, has many-to-many relationships with Author and Language."""
     title = models.CharField(max_length=255)
     authors = models.ManyToManyField(Author, related_name='books')
     pub_date = models.CharField(max_length=10, blank=True, null=True)
@@ -32,12 +35,11 @@ class Book(models.Model):
                                  blank=True, null=True)
 
     class Meta:
-        """Put constraint on combination of model fields.
+        """
+        Creates additional constraint and changes default ordering.
         
-        Ex. https://www.googleapis.com/books/v1/volumes?q=Hobbit
-        results in multiple imports of:
-        'John Ronald Reuel Tolkien, Hobbit czyli Tam i z powrotem,
-        pub. 1985, pp. 233 [pl] '
+        Additional UNIQUE constraint is needed in db to avoid multiple entries
+        with identical objects.
         """
         ordering = ['authors__name']
         constraints = [
@@ -51,15 +53,21 @@ class Book(models.Model):
         return self.title
 
     def save(self, *args, **kwargs):
-        """Save blank fields as None (NULL in db) instead of ''.
-        
-        Overrides default saving of blank fields as empty strings.
-        Database treats two empty strings as equal, which isn't true for NULLs.
-        This override enables saving multiple Book objects without ISBN or
-        cover_url while using those fields for UNIQUE check in the database.
         """
+        Save blank fields as None instead of empty string ''.
+        
+        Overrides default saving of blank fields as empty strings in database
+        and enforces saving them as NULLs (None is translated to NULL).
+        Database treats two empty strings as equal, which isn't true for NULLs,
+        so this override enables saving of multiple Book objects with some of
+        their fields empty while using those fields for UNIQUE check.
+        """
+        if not self.pages:
+            self.pages = None
         if not self.isbn:
             self.isbn = None
+        if not self.cover_url:
+            self.cover_url = None
         if not self.cover_url:
             self.cover_url = None
         super().save(*args, **kwargs)

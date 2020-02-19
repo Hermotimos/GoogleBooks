@@ -4,10 +4,12 @@ from django import forms
 
 
 def get_current_year():
+    """Return current year as int."""
     return datetime.datetime.now().year
 
 
 def is_date_or_empty(date_str):
+    """Check whether string validates as a date against given date formats."""
     passed = True if date_str == '' else False
     formats = ('%Y-%m-%d', '%Y-%m', '%Y')
     for format_ in formats:
