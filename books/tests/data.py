@@ -1,3 +1,8 @@
+"""
+Contains query and response data used in test_valid_post_data()
+in test_books_import_view.py.
+"""
+
 query_url = 'https://www.googleapis.com/books/v1/volumes?q=Hobbit&maxResults=40'
 response_text = """{'kind': 'books#volumes', 'totalItems': 321, 'items': [{'kind': 'books#volume', 'id': 'DqLPAAAAMAAJ', 'etag': 'wHYapAMEz4o', 'selfLink':
  'https://www.googleapis.com/books/v1/volumes/DqLPAAAAMAAJ', 'volumeInfo': {'title': 'Hobbit czyli Tam i z powrotem', 'authors': ['John

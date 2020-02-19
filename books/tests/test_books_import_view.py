@@ -54,10 +54,11 @@ class BooksImportViewTest(TestCase):
     
         self.client.post(self.url, data)
     
-        # As per 2010-02-19 => . data.py (Book: 40, Author: 36, Language: 2)
+        # As per 2010-02-19 => . data.py (Book: 40, Author: 35, Language: 2)
         # But this may vary; already observer Authors: 35 or 36.
+        # print('Authors:', Author.objects.count())
         self.assertTrue(Book.objects.count() == 40)
-        self.assertTrue(Author.objects.count() == 36)
+        self.assertTrue(Author.objects.count() == 35)
         self.assertTrue(Language.objects.count() == 2)
 
     def test_invalid_post_data(self):
