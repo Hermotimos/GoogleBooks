@@ -180,7 +180,7 @@ def books_import_view(request):
             
             messages.info(
                 request,
-                f'You added {added_cnt} books to your collection!'
+                f'You have added {added_cnt} books to your collection!'
             )
     else:
         form = BookImportForm()
