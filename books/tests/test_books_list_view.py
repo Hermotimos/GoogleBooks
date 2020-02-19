@@ -62,11 +62,11 @@ class BooksListViewTest(TestCase):
     def test_filters(self):
         books = Book.objects.all()
         
-        def check_filtering(test_case, obj, included_qs, excluded_qs, filter):
-            test_case.assertTrue(obj in included_qs)
+        def check_filtering(obj, included_qs, excluded_qs):
+            self.assertTrue(obj in included_qs)
             for o in excluded_qs:
                 self.assertTrue(o not in included_qs)
-                print(f'Check filter "{filter}": "{o}" not in {included_qs}')
+                # print(f'Check: "{o}" not in {included_qs}')
         
         for book in books:
             
@@ -75,14 +75,14 @@ class BooksListViewTest(TestCase):
             f = BookFilter(data={'title': in_title}, queryset=books)
             in_qs = f.qs
             out_qs = Book.objects.exclude(title__icontains=in_title)
-            check_filtering(self, book, in_qs, out_qs, filter='title')
+            check_filtering(book, in_qs, out_qs)
             
             # Test filter by language
             language_id = book.language.id
             f = BookFilter(data={'language': [language_id]}, queryset=books)
             in_qs = f.qs
             out_qs = Book.objects.exclude(language_id=language_id)
-            check_filtering(self, book, in_qs, out_qs, filter='language')
+            check_filtering(book, in_qs, out_qs)
 
             # Test filter by author
             author_id = book.authors.first().id
@@ -90,7 +90,7 @@ class BooksListViewTest(TestCase):
             in_qs = f.qs
             out_qs = Book.objects.exclude(authors__in=
                                           [a for a in book.authors.all()])
-            check_filtering(self, book, in_qs, out_qs, filter='author')
+            check_filtering(book, in_qs, out_qs)
 
         # Test filter by pub_date
         gt = '1998-12-31'
@@ -100,4 +100,5 @@ class BooksListViewTest(TestCase):
                        queryset=books)
         in_qs = f.qs
         out_qs = Book.objects.exclude(pub_date__gt=gt, pub_date__lte=lte)
-        check_filtering(self, book, in_qs, out_qs, filter='pub_date')
+        check_filtering(self.book_2, in_qs, out_qs)
+        self.assertTrue(self.book_1 not in in_qs)
