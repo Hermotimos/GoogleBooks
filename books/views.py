@@ -39,12 +39,13 @@ def books_add_view(request):
 
         more_authors = []
         for form in authors_fs:
-            try:
-                author_name = form.cleaned_data['name']
-                author, _ = Author.objects.get_or_create(name=author_name)
-                more_authors.append(author)
-            except KeyError:
-                pass
+            if form.is_valid():
+                try:
+                    author_name = form.cleaned_data['name']
+                    author, _ = Author.objects.get_or_create(name=author_name)
+                    more_authors.append(author)
+                except KeyError:
+                    pass
 
         language_code = language_form.cleaned_data['code']
         language, _ = Language.objects.get_or_create(code=language_code)
