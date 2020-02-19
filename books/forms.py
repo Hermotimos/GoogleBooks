@@ -60,11 +60,27 @@ class BookForm(forms.ModelForm):
         
     def clean_pub_date(self, *args, **kwargs):
         date = self.cleaned_data.get('pub_date')
-        [year, month, day] = date.split('-')
-        year, month, day = int(year), int(month), int(day)
         
-        if not ((year and month and day) or (year and month) or year):
-            raise forms.ValidationError('Provide valid date')
+        if len(date) == 0:
+            date = ''
+        else:
+            date_list = date.split('-')
+            year = date_list[0]
+            month = date_list[1] if len(date_list) == 2 else None
+            day = date_list[2] if len(date_list) == 3 else None
+    
+            if not ((year and month and day) or (year and month) or year):
+                raise forms.ValidationError('Provide valid date')
+    
+            if int(year) and int(month) and int(day):
+                date = date
+            elif int(year) and int(month):
+                date = year + '-' + month
+            elif int(year):
+                date = year
+            else:
+                date = ''
+        
         return date
 
 

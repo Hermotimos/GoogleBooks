@@ -93,19 +93,15 @@ class BooksListViewTest(TestCase):
                                           [a for a in book.authors.all()])
             check_filtering(self, book, in_qs, out_qs)
 
-            # Test filter by pud_date
-            gte = book.pub_date
-            f = BookFilter(data={'pub_date__gte': gte}, queryset=books)
-            in_qs = f.qs
-            out_qs = Book.objects.exclude(pub_date__gte=gte)
-            check_filtering(self, book, in_qs, out_qs)
-            
-            lte = str(int(book.pub_date) + 1)
-            f = BookFilter(data={'pub_date__gte': gte, 'pub_date__lte': lte},
-                           queryset=books)
-            in_qs = f.qs
-            out_qs = Book.objects.exclude(pub_date__gte=gte, pub_date__lte=lte)
-            check_filtering(self, book, in_qs, out_qs)
+        # Test filter by pub_date
+        gt = '1998-12-31'
+        lte = '1999-12-31'
+        f = BookFilter(data={'pub_date_range_after': gt,
+                             'pub_date_range_before': lte},
+                       queryset=books)
+        in_qs = f.qs
+        out_qs = Book.objects.exclude(pub_date__gt=gt, pub_date__lte=lte)
+        check_filtering(self, book, in_qs, out_qs, filter='pub_date')
 
 
 class BooksAddViewTest(TestCase):

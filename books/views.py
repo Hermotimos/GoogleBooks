@@ -58,19 +58,7 @@ def books_add_view(request):
 
         # pub_date
         date = book_form.cleaned_data['pub_date']
-        try:
-            [year, month, day] = date.split('-')
-        
-            if int(year) and int(month) and int(day):
-                book.pub_date = date
-            elif int(year) and int(month):
-                book.pub_date = year + '-' + month
-            elif int(year):
-                book.pub_date = year
-            else:
-                book.pub_date = ''
-        except ValueError:
-            book.pub_date = ''
+        book.pub_date = date
         
         book.save()
 
