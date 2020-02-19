@@ -176,8 +176,10 @@ def books_import_view(request):
             except IntegrityError:
                 pass
         
-        messages.info(request,
-                      f'You have added {added_cnt} books to your collection!')
+        messages.info(
+            request,
+            f'You have added {added_cnt} book(s) to your collection!',
+        )
     
     context = {
         'form': form,

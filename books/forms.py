@@ -55,6 +55,8 @@ class BookForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['title'].widget.attrs = {'size': 70}
+        self.fields['pub_date'].label = 'Publication date'
+        self.fields['isbn'].label = 'ISBN'
         
     def clean_pub_date(self, *args, **kwargs):
         date = self.cleaned_data.get('pub_date')
