@@ -1,5 +1,5 @@
-TEST_QUERY_URL = 'https://www.googleapis.com/books/v1/volumes?q=Hobbit&maxResults=40'
-TEST_RESPONSE_TEXT = """{'kind': 'books#volumes', 'totalItems': 321, 'items': [{'kind': 'books#volume', 'id': 'DqLPAAAAMAAJ', 'etag': 'wHYapAMEz4o', 'selfLink':
+query_url = 'https://www.googleapis.com/books/v1/volumes?q=Hobbit&maxResults=40'
+response_text = """{'kind': 'books#volumes', 'totalItems': 321, 'items': [{'kind': 'books#volume', 'id': 'DqLPAAAAMAAJ', 'etag': 'wHYapAMEz4o', 'selfLink':
  'https://www.googleapis.com/books/v1/volumes/DqLPAAAAMAAJ', 'volumeInfo': {'title': 'Hobbit czyli Tam i z powrotem', 'authors': ['John
 Ronald Reuel Tolkien'], 'publishedDate': '1985', 'industryIdentifiers': [{'type': 'OTHER', 'identifier': 'IND:39000004593617'}], 'readin
 gModes': {'text': False, 'image': False}, 'pageCount': 233, 'printType': 'BOOK', 'maturityRating': 'NOT_MATURE', 'allowAnonLogging': Fal

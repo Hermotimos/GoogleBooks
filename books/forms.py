@@ -5,6 +5,13 @@ from django import forms
 from books.models import Book
 
 
+def get_current_year():
+    return datetime.datetime.now().year
+
+
+YEARS_CHOICES = range(get_current_year(), 1450-1, -1)
+
+
 class FirstAuthorForm(forms.Form):
     name = forms.CharField(max_length=100, required=True)
 
@@ -32,21 +39,13 @@ class LanguageForm(forms.Form):
         self.fields['code'].label = '2-Digit language code'
 
 
-def get_current_year():
-    return datetime.datetime.now().year
-
-
-YEARS_CHOICES = range(get_current_year(), 1450-1, -1)
-
-
 class BookForm(forms.ModelForm):
     pages = forms.IntegerField(min_value=1, required=False)
     isbn = forms.CharField(min_length=13, max_length=13, required=False)
-
-    pub_date = forms.CharField(required=False,
-                               widget=forms.SelectDateWidget(
-                                   years=YEARS_CHOICES
-                               ))
+    pub_date = forms.CharField(
+        required=False,
+        widget=forms.SelectDateWidget(years=YEARS_CHOICES),
+    )
 
     class Meta:
         model = Book
@@ -70,7 +69,7 @@ class BookForm(forms.ModelForm):
             day = date_list[2] if len(date_list) == 3 else 0
     
             if not ((year and month and day) or (year and month) or year):
-                raise forms.ValidationError('Provide valid date')
+                raise forms.ValidationError('Provide valid date.')
     
             if int(year) and int(month) and int(day):
                 date = date
