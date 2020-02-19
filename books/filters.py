@@ -4,6 +4,7 @@ from books.models import Author, Language
 
 
 class BookFilter(filters.FilterSet):
+    """A filter for Book model for searching by specified fields."""
     title = filters.CharFilter(lookup_expr='icontains')
     authors = filters.ModelMultipleChoiceFilter(queryset=Author.objects.all())
     language = filters.ModelMultipleChoiceFilter(

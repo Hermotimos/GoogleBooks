@@ -8,6 +8,7 @@ YEARS_CHOICES = range(get_current_year(), 1450-1, -1)
 
 
 class AuthorForm(forms.Form):
+    """A form for searching by author and adding authors to database."""
     name = forms.CharField(max_length=100, required=False)
 
     def __init__(self, *args, **kwargs):
@@ -19,6 +20,7 @@ AuthorFormSet = forms.formset_factory(AuthorForm, extra=3)
 
 
 class LanguageForm(forms.Form):
+    """A form for searching by language and adding languages to database."""
     code = forms.CharField(min_length=2, max_length=2)
 
     def __init__(self, *args, **kwargs):
@@ -27,6 +29,7 @@ class LanguageForm(forms.Form):
 
 
 class BookForm(forms.ModelForm):
+    """A form for searching by Book fields and adding books to database."""
     pages = forms.IntegerField(min_value=1, required=False)
     isbn = forms.CharField(min_length=13, max_length=13, required=False)
     pub_date = forms.CharField(
@@ -39,12 +42,14 @@ class BookForm(forms.ModelForm):
         exclude = ['authors', 'language', 'pub_date']
 
     def __init__(self, *args, **kwargs):
+        """Override fields' labels and size."""
         super().__init__(*args, **kwargs)
         self.fields['title'].widget.attrs = {'size': 70}
         self.fields['pub_date'].label = 'Publication date'
         self.fields['isbn'].label = 'ISBN'
         
     def clean_pub_date(self, *args, **kwargs):
+        """Return date input from pub_date field as valid date or empty str."""
         date = self.cleaned_data.get('pub_date')
 
         if len(date) == 0:
@@ -69,6 +74,7 @@ class BookForm(forms.ModelForm):
 
 
 class BookImportForm(forms.Form):
+    """Form for importing volumes by keywords from Google Books API v1."""
     q = forms.CharField()
     intitle = forms.CharField(required=False)
     inauthor = forms.CharField(required=False)
@@ -79,6 +85,7 @@ class BookImportForm(forms.Form):
     oclc = forms.CharField(required=False)
 
     def __init__(self, *args, **kwargs):
+        """Override fields' labels and size."""
         super().__init__(*args, **kwargs)
         
         self.fields['q'].label = 'Keyword(s):'

@@ -9,6 +9,7 @@ from books.models import Author, Book, Language
 class BooksListViewTest(TestCase):
     @classmethod
     def setUpTestData(cls):
+        """Mock data in database and provide url for tests."""
         cls.author_1 = Author.objects.create(name='Test author 1')
         cls.author_2 = Author.objects.create(name='Test author 2')
         
@@ -39,14 +40,17 @@ class BooksListViewTest(TestCase):
         cls.url = reverse('list')
         
     def test_get(self):
+        """Status code of the HTTP response is 200."""
         response = self.client.get(self.url)
         self.assertEqual(response.status_code, 200)
         
     def test_url_resolves_view(self):
+        """URL is connected to specified view."""
         view = resolve('/')
         self.assertEqual(view.func, views.books_list_view)
         
     def test_contains(self):
+        """Response contains alle info about Book objects in the database."""
         response = self.client.get(self.url)
         
         for book in Book.objects.all():
@@ -60,13 +64,13 @@ class BooksListViewTest(TestCase):
             self.assertContains(response, book.language.code)
 
     def test_filters(self):
+        """Filter out list of books as per fielter fields' values. """
         books = Book.objects.all()
         
         def check_filtering(obj, included_qs, excluded_qs):
             self.assertTrue(obj in included_qs)
             for o in excluded_qs:
                 self.assertTrue(o not in included_qs)
-                # print(f'Check: "{o}" not in {included_qs}')
         
         for book in books:
             

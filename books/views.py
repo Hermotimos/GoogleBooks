@@ -14,6 +14,7 @@ from books.models import Author, Book, Language
 
 
 def books_list_view(request):
+    """Render list of all books in database with search form."""
     books = Book.objects.all()
     filter_ = BookFilter(request.GET, queryset=books)
 
@@ -25,6 +26,7 @@ def books_list_view(request):
 
 
 def books_add_view(request):
+    """Render form for adding books to database. Show list of added books."""
     first_author_form = AuthorForm(data=request.POST or None)
     authors_fs = AuthorFormSet(data=request.POST or None)
     book_form = BookForm(data=request.POST or None)
@@ -73,6 +75,7 @@ def books_add_view(request):
 
 
 def books_import_view(request):
+    """Render form for importing books by keywords from Google Books API v1."""
     books_list = []
     form = BookImportForm(data=request.POST or None)
     

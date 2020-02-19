@@ -2,29 +2,36 @@ from django.test import TestCase
 from django.urls import resolve, reverse
 
 from books import views
-from books.forms import (AuthorForm, AuthorFormSet, BookForm,
-                         LanguageForm)
+from books.forms import AuthorForm, AuthorFormSet, BookForm, LanguageForm
 from books.models import Author, Book, Language
 
 
 class BooksAddViewTest(TestCase):
     @classmethod
     def setUpTestData(cls):
+        """Provide url for tests."""
         cls.url = reverse('add')
 
     def test_get(self):
+        """Status code of the HTTP response is 200."""
         response = self.client.get(self.url)
         self.assertEqual(response.status_code, 200)
 
     def test_url_resolves_view(self):
+        """URL is connected to specified view."""
         view = resolve('/add/')
         self.assertEqual(view.func, views.books_add_view)
 
     def test_csrf(self):
+        """Response contains csrf token."""
         response = self.client.get(self.url)
         self.assertContains(response, 'csrfmiddlewaretoken')
         
     def test_contains_forms(self):
+        """
+        Response contains all specified forms and those are instances of the
+        corresponding forms' classes.
+        """
         response = self.client.get(self.url)
         
         first_author_form = response.context.get('first_author_form')
@@ -38,6 +45,7 @@ class BooksAddViewTest(TestCase):
         self.assertIsInstance(language_form, LanguageForm)
 
     def test_valid_post_data(self):
+        """Valid data results in creation of database objects."""
         data = {
             # first_author_form
             'name': 'Test author 1',
@@ -73,6 +81,10 @@ class BooksAddViewTest(TestCase):
         self.assertTrue(Language.objects.count() == 1)
 
     def test_invalid_post_data(self):
+        """
+        Invalid data does not redirect, shows the form again with
+        validation errors, and does not result in creation of any objects.
+        """
         data = {
             # first_author_form
             'name': 'len(name) > 100' * 100,
@@ -102,8 +114,6 @@ class BooksAddViewTest(TestCase):
         self.assertTrue(Language.objects.count() == 0)
         
         response = self.client.post(self.url, data)
-        
-        # should show the form again, not redirect
         self.assertEquals(response.status_code, 200)
         
         first_author_form = response.context.get('first_author_form')
@@ -121,6 +131,10 @@ class BooksAddViewTest(TestCase):
         self.assertTrue(Language.objects.count() == 0)
         
     def test_invalid_post_data_empty_fields(self):
+        """
+        Invalid data (empty fields) does not redirect, shows the form again
+        with validation errors, and does not result in creation of any objects.
+        """
         data = {
             # first_author_form
             'name': '',
@@ -150,8 +164,6 @@ class BooksAddViewTest(TestCase):
         self.assertTrue(Language.objects.count() == 0)
         
         response = self.client.post(self.url, data)
-        
-        # should show the form again, not redirect
         self.assertEquals(response.status_code, 200)
         
         language_form = response.context.get('language_form')
