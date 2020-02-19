@@ -33,7 +33,6 @@ def books_add_view(request):
     if (first_author_form.is_valid() and language_form.is_valid()
             and book_form.is_valid() and authors_fs.is_valid()):
         
-        # referential integrity
         first_author_name = first_author_form.cleaned_data['name']
         first_author, _ = Author.objects.get_or_create(name=first_author_name)
 
@@ -57,10 +56,8 @@ def books_add_view(request):
         if more_authors:
             book.authors.add(*list(more_authors))
 
-        # pub_date
         date = book_form.cleaned_data['pub_date']
         book.pub_date = date
-        
         book.save()
 
         messages.info(request, f'New book has been added!')
@@ -80,6 +77,7 @@ def books_import_view(request):
     form = BookImportForm(data=request.POST or None)
     
     if form.is_valid():
+        
         # ----- Retrieve JSON data from API -----
         terms = {}
         for k, v in form.cleaned_data.items():
@@ -102,7 +100,7 @@ def books_import_view(request):
                 title = item['volumeInfo']['title']
             except KeyError:
                 title = ''
-            
+
             try:
                 authors_list = item['volumeInfo']['authors']
             except KeyError:
@@ -117,7 +115,17 @@ def books_import_view(request):
                 pages = item['volumeInfo']['pageCount']
             except KeyError:
                 pages = None
+                
+            try:
+                language = item['volumeInfo']['language']
+            except KeyError:
+                language = ''
             
+            try:
+                cover_url = item['volumeInfo']['imageLinks']['thumbnail']
+            except KeyError:
+                cover_url = ''
+                
             isbn = ''
             try:
                 for elem in item['volumeInfo']['industryIdentifiers']:
@@ -128,19 +136,8 @@ def books_import_view(request):
                         isbn = elem['identifier']
             except KeyError:
                 isbn = ''
-            
-            try:
-                language = item['volumeInfo']['language']
-            except KeyError:
-                language = ''
-            
-            try:
-                cover_url = item['volumeInfo']['imageLinks']['thumbnail']
-            except KeyError:
-                cover_url = ''
-            
+
             # ----- Populate database with parsed data -----
-            
             try:
                 book, added = Book.objects.get_or_create(
                     title=title,

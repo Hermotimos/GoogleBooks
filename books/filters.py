@@ -11,5 +11,5 @@ class BookFilter(filters.FilterSet):
     )
     pub_date_range = filters.DateFromToRangeFilter(
         field_name='pub_date',
-        label='Date After (excl.) - Before (incl.) as yyyy-mm-dd',
+        label='Date After (excluded) - Before (included) as YYYY-MM-DD',
     )
