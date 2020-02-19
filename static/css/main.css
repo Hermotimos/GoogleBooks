@@ -1,3 +1,6 @@
+
+/* GENERAL */
+
 body {
   background: #fafafa;
   color: #444444;
@@ -9,7 +12,6 @@ body {
 */
 }
 
-
 @font-face {
   font-family: 'IM Fell Great Primer';
   src: url("../fonts/IMFeGPrm29P.ttf");
@@ -20,19 +22,30 @@ body {
   color: #444444;
 }
 
-/*
-.small-caps {font-variant: small-caps;}
-*/
 
-ul.bullets-1 li {list-style: "✧";}
 
-ul[class^=bullets] > li > * {padding-left: 0.5rem;}
+/* NAVBAR */
 
 .bg-nav {background-color: #075970;}
 
 .site-header .navbar-nav .nav-link {color: #cbd5db;}
 .site-header .navbar-nav .nav-link:hover {color: #ffffff;}
-.site-header .navbar-nav .nav-link.active {font-weight: 500;}
+
+.navbar-brand {
+  letter-spacing: 0.05rem;
+  word-spacing: 0.15rem;
+}
+
+
 
 
 .btn-bottom button {margin-top: 23px}
+
+ul.bullets-1 li {list-style: "✧";}
+/*
+ul[class^=bullets] > li > * {padding-left: 0.5rem;}
+*/
+
+/*
+.small-caps {font-variant: small-caps;}
+*/
