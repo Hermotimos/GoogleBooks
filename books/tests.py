@@ -4,7 +4,7 @@ from django.urls import resolve, reverse
 from books import views
 from books.filters import BookFilter
 from books.forms import (FirstAuthorForm, AuthorFormSet, BookForm,
-                         LanguageForm)
+                         LanguageForm, BookImportForm)
 from books.models import Author, Book, Language
 
 
@@ -19,7 +19,7 @@ class BooksListViewTest(TestCase):
         
         cls.book_1 = Book.objects.create(
             title='Test title 1',
-            pub_date='2000',
+            pub_date='2000-01-01',
             pages=200,
             isbn='9780575079212',
             cover_url='https://www.abebooks.com/book-search/author/'
@@ -28,7 +28,7 @@ class BooksListViewTest(TestCase):
         )
         cls.book_2 = Book.objects.create(
             title='Title test 2',
-            pub_date='1999',
+            pub_date='1999-01-01',
             pages=199,
             isbn='9788834730317',
             cover_url='https://www.abebooks.com/9788834730317/'
@@ -64,10 +64,11 @@ class BooksListViewTest(TestCase):
     def test_filters(self):
         books = Book.objects.all()
         
-        def check_filtering(test_case, obj, included_qs, excluded_qs):
+        def check_filtering(test_case, obj, included_qs, excluded_qs, filter):
             test_case.assertTrue(obj in included_qs)
             for o in excluded_qs:
                 self.assertTrue(o not in included_qs)
+                print(f'Check filter "{filter}": "{o}" not in {included_qs}')
         
         for book in books:
             
@@ -76,14 +77,14 @@ class BooksListViewTest(TestCase):
             f = BookFilter(data={'title': in_title}, queryset=books)
             in_qs = f.qs
             out_qs = Book.objects.exclude(title__icontains=in_title)
-            check_filtering(self, book, in_qs, out_qs)
+            check_filtering(self, book, in_qs, out_qs, filter='title')
             
             # Test filter by language
             language_id = book.language.id
             f = BookFilter(data={'language': [language_id]}, queryset=books)
             in_qs = f.qs
             out_qs = Book.objects.exclude(language_id=language_id)
-            check_filtering(self, book, in_qs, out_qs)
+            check_filtering(self, book, in_qs, out_qs, filter='language')
 
             # Test filter by author
             author_id = book.authors.first().id
@@ -91,7 +92,7 @@ class BooksListViewTest(TestCase):
             in_qs = f.qs
             out_qs = Book.objects.exclude(authors__in=
                                           [a for a in book.authors.all()])
-            check_filtering(self, book, in_qs, out_qs)
+            check_filtering(self, book, in_qs, out_qs, filter='author')
 
         # Test filter by pub_date
         gt = '1998-12-31'
@@ -220,3 +221,26 @@ class BooksAddViewTest(TestCase):
         self.assertTrue(Book.objects.count() == 0)
         self.assertTrue(Author.objects.count() == 0)
         self.assertTrue(Language.objects.count() == 0)
+
+
+class BooksImportViewTest(TestCase):
+    @classmethod
+    def setUpTestData(cls):
+        cls.url = reverse('import')
+
+    def test_get(self):
+        response = self.client.get(self.url)
+        self.assertEqual(response.status_code, 200)
+
+    def test_url_resolves_view(self):
+        view = resolve('/import/')
+        self.assertEqual(view.func, views.books_import_view)
+
+    def test_csrf(self):
+        response = self.client.get(self.url)
+        self.assertContains(response, 'csrfmiddlewaretoken')
+
+    def test_contains_form(self):
+        response = self.client.get(self.url)
+        form = response.context.get('form')
+        self.assertIsInstance(form, BookImportForm)
