@@ -24,9 +24,9 @@
           {% if book.title %} <i>{{ book.title }}</i>, {% endif %}
           
           {% if book.pub_date and book.pages %}
-            pub. {{ book.pub_date|slice:':4' }}, pp. {{ book.pages }}
+            pub. {{ book.pub_date }}, pp. {{ book.pages }}
           {% elif book.pub_date %}
-            pub. {{ book.pub_date|slice:':4' }}
+            pub. {{ book.pub_date }}
           {% elif book.pages %}
             , pp. {{ book.pages }}
           {% endif %}
