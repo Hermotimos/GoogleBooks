@@ -16,7 +16,6 @@
     <form method="POST">
       {% csrf_token %}
       <div class="form-row">
-
         <div class="col-sm-6 col-md-4 col-lg-3 form-group">{{ form.q|as_crispy_field }}</div>
         <div class="col-sm-6 col-md-4 col-lg-3 form-group">{{ form.intitle|as_crispy_field }}</div>
         <div class="col-sm-6 col-md-4 col-lg-3 form-group">{{ form.inauthor|as_crispy_field }}</div>
@@ -54,7 +53,7 @@
 
     <ul>
       {% for book in books_list %}
-        <li class="pb-3">
+        <li class="pb-3 text-justify">
           {% if book.authors.all %} {{ book.authors.all|join:', ' }}, {% endif %}
           {% if book.title %} <i>{{ book.title }}</i>, {% endif %}
           

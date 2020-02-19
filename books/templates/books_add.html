@@ -27,13 +27,11 @@
       <!--    Title        -->
       <div class="form-row">
         <div class="col-md-12 form-group">{{ book_form.title|as_crispy_field }}</div>
-    <!--              {% if book_form.title.errors %}<div class="col-md-12 alert alert-danger">{{ book_form.title.errors }}</div>{% endif %}-->
       </div>
       
       <!--    First author        -->
       <div class="form-row">
         <div class="col-md-3 form-group mr-5">{{ first_author_form.name|as_crispy_field }}</div>
-    <!--              {% if first_author_form.name.errors %}<div class="col-md-4">{{ first_author_form.name.errors }}</div>{% endif %}-->
         <div class="col-md-3 btn-bottom">
           <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#authors" aria-expanded="false" aria-controls="authors">
             Add authors
@@ -41,7 +39,7 @@
         </div>
       </div>
 
-<!--            Additional authors-->
+      <!--    Additional authors-->
       <div id="authors" class="collapse form-row">
         {{ authors_fs.management_form }}
         {% for author_form in authors_fs %}
