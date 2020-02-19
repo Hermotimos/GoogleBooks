@@ -7,14 +7,6 @@ from books.utils import get_current_year, is_date_or_empty
 YEARS_CHOICES = range(get_current_year(), 1450-1, -1)
 
 
-class FirstAuthorForm(forms.Form):
-    name = forms.CharField(max_length=100, required=True)
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.fields['name'].label = 'Author'
-
-
 class AuthorForm(forms.Form):
     name = forms.CharField(max_length=100, required=False)
 
@@ -24,6 +16,10 @@ class AuthorForm(forms.Form):
 
 
 AuthorFormSet = forms.formset_factory(AuthorForm, extra=3)
+
+
+class FirstAuthorForm(AuthorForm):
+    name = forms.CharField(max_length=100, required=True)
 
 
 class LanguageForm(forms.Form):
