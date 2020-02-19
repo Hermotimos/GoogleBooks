@@ -47,9 +47,6 @@
         {% for author_form in authors_fs %}
           <div class="col-md-3 form-group">{{ author_form.name|as_crispy_field }}</div>
         {% endfor %}
-    <!--              {% for author_form in authors_fs %}-->
-    <!--                {% if author_form.name.errors %}<div class="col-md-4">{{ author_form.name.errors }}</div>{% endif %}-->
-    <!--              {% endfor %}-->
       </div>
       
       <!--    Publication date        -->
@@ -61,14 +58,10 @@
       <div class="form-row">
         <div class="col-md-4 form-group">{{ book_form.pages|as_crispy_field }}</div>
         <div class="col-md-4 form-group">{{ book_form.isbn|as_crispy_field }}</div>
-    <!--              {% if book_form.pages.errors %}<div class="col-md-3">{{ book_form.pages.errors }}</div>{% endif %}-->
-    <!--              {% if book_form.isbn.errors %}<div class="col-md-3">{{ book_form.isbn.errors }}</div>{% endif %}-->
       </div>
       <div class="form-row">
         <div class="col-md-4 form-group">{{ language_form.code|as_crispy_field }}</div>
         <div class="col-md-4 form-group">{{ book_form.cover_url|as_crispy_field }}</div>
-    <!--              {% if language_form.code.errors %}<div class="col-md-3">{{ language_form.code.errors }}</div>{% endif %}-->
-    <!--              {% if book_form.cover_url.errors %}<div class="col-md-3">{{ book_form.cover_url.errors }}</div>{% endif %}-->
       </div>
       
       <!--   Submit     -->

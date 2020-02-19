@@ -49,3 +49,13 @@ ul[class^=bullets] > li > * {padding-left: 0.5rem;}
 /*
 .small-caps {font-variant: small-caps;}
 */
+
+/*
+input.dateinput {
+  padding: 2px;
+  width: 10.8319rem;
+}
+*/
+
+div.controls p.help-block {margin-top: 0.3rem;}
+div.controls p.help-block strong {color: #c90d00;}
