@@ -63,7 +63,7 @@ class BookForm(forms.ModelForm):
         [year, month, day] = date.split('-')
         year, month, day = int(year), int(month), int(day)
         
-        if not (year and month and day) or (year and month) or year:
+        if not ((year and month and day) or (year and month) or year):
             raise forms.ValidationError('Provide valid date')
         return date
 
