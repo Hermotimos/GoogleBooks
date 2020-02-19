@@ -36,14 +36,17 @@ def get_current_year():
     return datetime.datetime.now().year
 
 
+YEARS_CHOICES = range(get_current_year(), 1450-1, -1)
+
+
 class BookForm(forms.ModelForm):
     pages = forms.IntegerField(min_value=1, required=False)
     isbn = forms.CharField(min_length=13, max_length=13, required=False)
 
-    year = forms.IntegerField(min_value=1450, max_value=get_current_year,
-                              required=False)
-    month = forms.IntegerField(min_value=1, max_value=12, required=False)
-    day = forms.IntegerField(min_value=1, max_value=31, required=False)
+    pub_date = forms.CharField(required=False,
+                               widget=forms.SelectDateWidget(
+                                   years=YEARS_CHOICES
+                               ))
 
     class Meta:
         model = Book
@@ -52,6 +55,15 @@ class BookForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['title'].widget.attrs = {'size': 70}
+        
+    def clean_pub_date(self, *args, **kwargs):
+        date = self.cleaned_data.get('pub_date')
+        [year, month, day] = date.split('-')
+        year, month, day = int(year), int(month), int(day)
+        
+        if not (year and month and day) or (year and month) or year:
+            raise forms.ValidationError('Provide valid date')
+        return date
 
 
 class BookImportForm(forms.Form):
