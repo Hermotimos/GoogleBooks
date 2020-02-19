@@ -18,10 +18,6 @@ class AuthorForm(forms.Form):
 AuthorFormSet = forms.formset_factory(AuthorForm, extra=3)
 
 
-class FirstAuthorForm(AuthorForm):
-    name = forms.CharField(max_length=100, required=True)
-
-
 class LanguageForm(forms.Form):
     code = forms.CharField(min_length=2, max_length=2)
 

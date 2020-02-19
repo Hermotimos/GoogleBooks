@@ -2,7 +2,7 @@ from django.test import TestCase
 from django.urls import resolve, reverse
 
 from books import views
-from books.forms import (FirstAuthorForm, AuthorFormSet, BookForm,
+from books.forms import (AuthorForm, AuthorFormSet, BookForm,
                          LanguageForm)
 from books.models import Author, Book, Language
 
@@ -32,7 +32,7 @@ class BooksAddViewTest(TestCase):
         book_form = response.context.get('book_form')
         language_form = response.context.get('language_form')
         
-        self.assertIsInstance(first_author_form, FirstAuthorForm)
+        self.assertIsInstance(first_author_form, AuthorForm)
         self.assertIsInstance(authors_fs, AuthorFormSet)
         self.assertIsInstance(book_form, BookForm)
         self.assertIsInstance(language_form, LanguageForm)
@@ -154,13 +154,8 @@ class BooksAddViewTest(TestCase):
         # should show the form again, not redirect
         self.assertEquals(response.status_code, 200)
         
-        first_author_form = response.context.get('first_author_form')
-        authors_fs = response.context.get('authors_fs')
         language_form = response.context.get('language_form')
         book_form = response.context.get('book_form')
-
-        self.assertTrue(first_author_form.errors)
-        self.assertTrue(authors_fs.errors)
         self.assertTrue(language_form.errors)
         self.assertTrue(book_form.errors)
 

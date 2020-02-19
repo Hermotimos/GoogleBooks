@@ -8,7 +8,7 @@ import requests
 from requests import Request
 
 from books.filters import BookFilter
-from books.forms import (BookForm, FirstAuthorForm, AuthorFormSet,
+from books.forms import (BookForm, AuthorForm, AuthorFormSet,
                          LanguageForm, BookImportForm)
 from books.models import Author, Book, Language
 
@@ -25,7 +25,7 @@ def books_list_view(request):
 
 
 def books_add_view(request):
-    first_author_form = FirstAuthorForm(data=request.POST or None)
+    first_author_form = AuthorForm(data=request.POST or None)
     authors_fs = AuthorFormSet(data=request.POST or None)
     book_form = BookForm(data=request.POST or None)
     language_form = LanguageForm(data=request.POST or None)
