@@ -101,6 +101,8 @@ def books_import_view(request):
                       params=terms)
         prep = req.prepare()
         url = prep.url.replace('&', '+')
+        # set max results to 40 instead of default 10 (40 is max as per Google)
+        url += '&maxResults=40'
         response = requests.get(url)
         
         # ----- Parse JSON data -----
