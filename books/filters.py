@@ -9,7 +9,7 @@ class BookFilter(filters.FilterSet):
     language = filters.ModelMultipleChoiceFilter(
         queryset=Language.objects.all()
     )
-    pub_date_between = filters.DateFromToRangeFilter(
+    pub_date_range = filters.DateFromToRangeFilter(
         field_name='pub_date',
-        label='Date (From - To) yyyy-mm-dd',
+        label='Date After (excl.) - Before (incl.) as yyyy-mm-dd',
     )
