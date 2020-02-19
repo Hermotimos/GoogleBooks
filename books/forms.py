@@ -66,8 +66,8 @@ class BookForm(forms.ModelForm):
         else:
             date_list = date.split('-')
             year = date_list[0]
-            month = date_list[1] if len(date_list) == 2 else None
-            day = date_list[2] if len(date_list) == 3 else None
+            month = date_list[1] if len(date_list) == 2 else 0
+            day = date_list[2] if len(date_list) == 3 else 0
     
             if not ((year and month and day) or (year and month) or year):
                 raise forms.ValidationError('Provide valid date')
