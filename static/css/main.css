@@ -37,9 +37,11 @@ body {
 }
 
 
+@media screen and (min-width: 600px) {
+  button.btn-bottom {margin-top: 23px}
+}
 
 
-.btn-bottom button {margin-top: 23px}
 
 ul.bullets-1 li {list-style: "✧";}
 /*
@@ -59,3 +61,18 @@ input.dateinput {
 
 div.controls p.help-block {margin-top: 0.3rem;}
 div.controls p.help-block strong {color: #c90d00;}
+
+div.pub-date select {
+  font-size: 21px;
+}
+/*
+.form-control {
+  max-width: 100%;
+}
+*/
+
+.textinput, .urlinput, .numberinput {
+     width: 100%;
+     max-width: 15.3rem;
+     box-sizing: border-box;
+}

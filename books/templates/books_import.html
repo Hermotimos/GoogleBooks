@@ -10,7 +10,18 @@
 
 {% block content %}
   
-  <div class="col-md-12">
+  <!--  MESSAGES  -->
+  <div class="col-sm-12">
+    {% if messages %}
+      {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">
+            {{ message }}
+        </div>
+      {% endfor %}
+    {% endif %}
+  </div>
+
+  <div class="col-md-12 mx-4 my-5">
     
     <!--  FORM        -->
     <form method="POST">
@@ -25,31 +36,17 @@
         <div class="col-sm-6 col-md-4 col-lg-3 form-group">{{ form.subject|as_crispy_field }}</div>
         <div class="col-sm-6 col-md-4 col-lg-3 form-group">{{ form.isbn|as_crispy_field }}</div>
       </div>
-      <br>
       <div class="form-row">
-        <div class="col-sm-6 col-md-4 form-group">{{ form.lccn|as_crispy_field }}</div>
+        <div class="col-sm-6 col-md-4 col-lg-3 form-group">{{ form.lccn|as_crispy_field }}</div>
+        <div class="col-sm-6 col-md-4 col-lg-3 form-group">{{ form.oclc|as_crispy_field }}</div>
       </div>
-      <br>
-      <div class="form-row">
-        <div class="col-sm-6 col-md-4 form-group">{{ form.oclc|as_crispy_field }}</div>
-      </div>
-      
       <br>
       <div>
-        <input class="btn btn-dark" type="submit" value="Import"/>
+        <input class="btn btn-outline-dark" type="submit" value="Import"/>
       </div>
-      
     </form>
     
     <br>
-    <!--  MESSAGES  -->
-    {% if messages %}
-      {% for message in messages %}
-        <div class="alert alert-{{ message.tags }}">
-            {{ message }}
-        </div>
-      {% endfor %}
-    {% endif %}
 
     <ul>
       {% for book in books_list %}

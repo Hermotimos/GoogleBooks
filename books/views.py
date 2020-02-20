@@ -169,7 +169,7 @@ def books_import_view(request):
         
         messages.info(
             request,
-            f'You have added {added_cnt} book(s) to your collection!',
+            f'You have imported {added_cnt} book(s) to your collection!',
         )
     
     context = {

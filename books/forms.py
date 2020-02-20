@@ -31,7 +31,7 @@ class LanguageForm(forms.Form):
 class BookForm(forms.ModelForm):
     """A form for searching by Book fields and adding books to database."""
     pages = forms.IntegerField(min_value=1, required=False)
-    isbn = forms.CharField(min_length=13, max_length=13, required=False)
+    isbn = forms.CharField(max_length=13, required=False)
     pub_date = forms.CharField(
         required=False,
         widget=forms.SelectDateWidget(years=YEARS_CHOICES),
@@ -44,10 +44,9 @@ class BookForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         """Override fields' labels and size."""
         super().__init__(*args, **kwargs)
-        self.fields['title'].widget.attrs = {'size': 70}
         self.fields['pub_date'].label = 'Publication date'
         self.fields['isbn'].label = 'ISBN'
-        
+
     def clean_pub_date(self, *args, **kwargs):
         """Return date input from pub_date field as valid date or empty str."""
         date = self.cleaned_data.get('pub_date')
@@ -87,27 +86,15 @@ class BookImportForm(forms.Form):
     def __init__(self, *args, **kwargs):
         """Override fields' labels and size."""
         super().__init__(*args, **kwargs)
-        
         self.fields['q'].label = 'Keyword(s):'
-        self.fields['q'].widget.attrs = {'size': 25}
-        
         self.fields['intitle'].label = 'In title:'
-        self.fields['intitle'].widget.attrs = {'size': 25}
-        
         self.fields['inauthor'].label = 'In author:'
-        self.fields['inauthor'].widget.attrs = {'size': 25}
-        
         self.fields['inpublisher'].label = 'In publisher:'
-        self.fields['inpublisher'].widget.attrs = {'size': 25}
-        
         self.fields['subject'].label = 'In category:'
-        self.fields['subject'].widget.attrs = {'size': 25}
-        
         self.fields['isbn'].label = 'ISBN:'
-        self.fields['isbn'].widget.attrs = {'size': 25}
-        
-        self.fields['lccn'].label = 'Library of Congress Control Number:'
-        self.fields['lccn'].widget.attrs = {'size': 25}
-        
-        self.fields['oclc'].label = 'Online Computer Library Center number:'
-        self.fields['oclc'].widget.attrs = {'size': 25}
+        self.fields['lccn'].label = '<small>' \
+                                    'Library of Congress Control No.:' \
+                                    '</small>'
+        self.fields['oclc'].label = '<small>' \
+                                    'Online Computer Library Center No.:' \
+                                    '</small>'
