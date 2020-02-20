@@ -21,12 +21,10 @@
     {% endif %}
   </div>
   
-  <div class="col-md-12 mx-4 my-5">
-
+  <div class="col-md-12 m-4 mb-5">
     <!--  FORMS        -->
     <form method="POST">
       {% csrf_token %}
-      
       <!--    Title & First author       -->
       <div class="form-row">
         <div class="col-sm-6 col-md-4 col-lg-3 form-group">{{ book_form.title|as_crispy_field }}</div>
@@ -37,7 +35,6 @@
           </button>
         </div>
       </div>
-      
       <!--    Additional authors-->
       <div id="authors" class="collapse">
         {{ authors_fs.management_form }}
@@ -47,27 +44,23 @@
           {% endfor %}
         </div>
       </div>
-      
       <!--    Publication date        -->
       <div class="form-row pub-date">
         <div class="col-sm-6 col-md-4 col-lg-3 form-group">{{ book_form.pub_date|as_crispy_field }}</div>
         <div class="col-sm-6 col-md-4 col-lg-3 form-group">{{ book_form.pages|as_crispy_field }}</div>
       </div>
-      
       <!--    Remaining fields        -->
       <div class="form-row">
         <div class="col-sm-6 col-md-4 col-lg-3 form-group">{{ language_form.code|as_crispy_field }}</div>
         <div class="col-sm-6 col-md-4 col-lg-3 form-group">{{ book_form.isbn|as_crispy_field }}</div>
         <div class="col-sm-6 col-md-4 col-lg-3 form-group">{{ book_form.cover_url|as_crispy_field }}</div>
       </div>
-      
       <br>
-      
       <!--   Submit     -->
       <div>
         <input class="btn btn-outline-dark" type="submit" value="Add to collection"/>
       </div>
-      
     </form>
   </div>
+
 {% endblock content %}

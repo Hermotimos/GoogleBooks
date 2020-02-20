@@ -9,14 +9,25 @@
 
 
 {% block content %}
-  <div class="col-md-12">
-  
+
+  <div class="col-md-12 m-4 mb-5">
     <form method="GET">
-      {{ filter.form|crispy }}
-      <button type="submit" class="btn btn-dark">Search</button>
+      <div class="form-row">
+        <div class="col-sm-12 form-group">{{ filter.form.title|as_crispy_field }}</div>
+      </div>
+      <div class="form-row">
+        <div class="col-sm-2 form-group lang">{{ filter.form.language|as_crispy_field }}</div>
+        <div class="col-sm-10 form-group auth">{{ filter.form.authors|as_crispy_field }}</div>
+      </div>
+      <div class="form-row">
+        <div class="col-sm-12 form-group">{{ filter.form.pub_date_range|as_crispy_field }}</div>
+      </div>
+      <br>
+      <button type="submit" class="btn btn-outline-dark">Search</button>
     </form>
-    
-    <br>
+  </div>
+
+  <div class="col-md-12 mx-4 results">
     <ul>
       {% for book in filter.qs %}
         <li class="pb-3 text-justify">
@@ -45,6 +56,6 @@
         </li>
       {% endfor %}
     </ul>
-    
   </div>
+
 {% endblock content %}

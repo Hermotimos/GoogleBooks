@@ -5,11 +5,6 @@ body {
   background: #fafafa;
   color: #444444;
   margin-top: 5rem;
-/*
-  background-image: url("../img/sky.jpg");
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-*/
 }
 
 @font-face {
@@ -21,7 +16,6 @@ body {
   font-family: 'IM Fell Great Primer', serif;
   color: #444444;
 }
-
 
 
 /* NAVBAR */
@@ -36,28 +30,12 @@ body {
   word-spacing: 0.15rem;
 }
 
-
 @media screen and (min-width: 600px) {
-  button.btn-bottom {margin-top: 23px}
+  button.btn-bottom {margin-top: 23px;}
 }
 
 
-
-ul.bullets-1 li {list-style: "✧";}
-/*
-ul[class^=bullets] > li > * {padding-left: 0.5rem;}
-*/
-
-/*
-.small-caps {font-variant: small-caps;}
-*/
-
-/*
-input.dateinput {
-  padding: 2px;
-  width: 10.8319rem;
-}
-*/
+/* FORMS */
 
 div.controls p.help-block {margin-top: 0.3rem;}
 div.controls p.help-block strong {color: #c90d00;}
@@ -65,14 +43,24 @@ div.controls p.help-block strong {color: #c90d00;}
 div.pub-date select {
   font-size: 21px;
 }
-/*
-.form-control {
-  max-width: 100%;
-}
-*/
 
 .textinput, .urlinput, .numberinput {
-     width: 100%;
-     max-width: 15.3rem;
-     box-sizing: border-box;
+  width: 100%;
+  max-width: 15.3rem;
+}
+
+.lang .selectmultiple {
+  width: 100%;
+  max-width: 6rem;
+  height: 10rem;
+}
+
+.auth .selectmultiple {
+  width: 100%;
+  max-width: 20rem;
+  height: 10rem;
+}
+
+div.results {
+  font-size: 1.1rem;
 }

@@ -21,8 +21,7 @@
     {% endif %}
   </div>
 
-  <div class="col-md-12 mx-4 my-5">
-    
+  <div class="col-md-12 m-4 mb-5">
     <!--  FORM        -->
     <form method="POST">
       {% csrf_token %}
@@ -45,9 +44,9 @@
         <input class="btn btn-outline-dark" type="submit" value="Import"/>
       </div>
     </form>
-    
-    <br>
+  </div>
 
+  <div class="col-md-12 mx-4 results">
     <ul>
       {% for book in books_list %}
         <li class="pb-3 text-justify">
@@ -76,6 +75,6 @@
         </li>
       {% endfor %}
     </ul>
-
   </div>
+
 {% endblock content %}
