@@ -1,7 +1,7 @@
 from django import forms
 
 from books.models import Book
-from books.utils import get_current_year, is_date_or_empty
+from books.utils import get_current_year, get_date_or_empty
 
 
 YEARS_CHOICES = range(get_current_year(), 1450-1, -1)
@@ -50,25 +50,7 @@ class BookForm(forms.ModelForm):
     def clean_pub_date(self, *args, **kwargs):
         """Return date input from pub_date field as valid date or empty str."""
         date = self.cleaned_data.get('pub_date')
-
-        if len(date) == 0:
-            date = ''
-        else:
-            date_list = date.split('-')
-            year = date_list[0]
-            month = date_list[1] if len(date_list) > 1 else 0
-            day = date_list[2] if len(date_list) > 2 else 0
-    
-            if int(year) and int(month) and int(day):
-                date = date
-            elif int(year) and int(month):
-                date = year + '-' + month
-            elif int(year):
-                date = year
-            else:
-                date = ''
-                
-            is_date_or_empty(date)
+        date = get_date_or_empty(date)
         return date
 
 

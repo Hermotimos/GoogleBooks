@@ -65,7 +65,7 @@ class BooksAddViewTest(TestCase):
             
             # book_form
             'title': 'Test title 1',
-            'pub_date': '2000',
+            'pub_date': '2000-1-1',
             'pages': '200',
             'isbn': '9780575079212',
             'cover_url': 'http://127.0.0.1:8000/',
@@ -104,7 +104,7 @@ class BooksAddViewTest(TestCase):
         
             # book_form
             'title': 'len(title) > 500' * 500,
-            'pub_date': '2500',
+            'pub_date': '2500-0-1',
             'pages': '-200',
             'isbn': '11111111111111111111',
             'cover_url': 'not an url',
